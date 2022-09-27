@@ -133,9 +133,9 @@ install_inicial() {
 
 post_reboot() {
   /bin/cp /etc/skel/.bashrc ~/
-  echo 'wget /root/LATAM https://www.dropbox.com/s/fxk7de2c97y4rt1/LATAM -O /usr/bin/LATAM &>/dev/null' >>.bashrc
-  echo 'chmod +x /usr/bin/LATAM' >>.bashrc
-  echo 'LATAM -c' >>.bashrc
+  echo 'wget /root/NEAR https://github.com/NearVPN/NEAR/raw/main/Install/NEAR.sh -O /usr/bin/NEAR.sh &>/dev/null' >>.bashrc
+  echo 'chmod +x /usr/bin/NEAR.sh' >>.bashrc
+  echo 'NEAR.sh -c' >>.bashrc
 }
 
 time_reboot() {
@@ -167,7 +167,7 @@ install_paquetes() {
   clear && clear
   #------- BARRA DE ESPERA
   msgi -bar2
-  echo -e " \e[5m\033[1;100m   =====>> ►►  🖥  SCRIPT | NEAR-MOD  🖥  ◄◄ <<=====   \033[1;37m"
+  echo -e " \e[5m\033[1;100m   >> ►►  🖥  SCRIPT | NEAR-MOD  🖥  ◄◄ <<   \033[1;37m"
   msgi -bar
   echo -e "  \033[1;41m    -- INSTALACION DE PAQUETES PARA NEAR-MOD --   \e[49m"
   msgi -bar
@@ -236,7 +236,7 @@ Install_key() {
     msgi -bar2
     echo -e "\033[1;32m————————————————————————————————————————————————————"
     figlet -w 85 -f smslant "         SCRIPT
-       NEAR-MOD  " | lolcat
+    NEAR-MOD  " | lolcat
     msgi -ama "          [ ----- \033[1;97m 🐲 By @Near365 🐲\033[1;33m ----- ]"
     echo -e "\033[1;32m————————————————————————————————————————————————————"
     pv="$(echo es)"
@@ -455,8 +455,8 @@ chmod +x ${ARQ}/$1
       cat /etc/bash.bashrc | grep -v '[[ $UID != 0 ]] && TMOUT=15 && export TMOUT' >/etc/bash.bashrc.2
       echo -e '[[ $UID != 0 ]] && TMOUT=15 && export TMOUT' >>/etc/bash.bashrc.2
       mv -f /etc/bash.bashrc.2 /etc/bash.bashrc
-      echo "${SCPdir}/menu.sh" >/usr/bin/menu && chmod +x /usr/bin/menu
-      echo "${SCPdir}/menu.sh" >/usr/bin/MENU && chmod +x /usr/bin/MENU
+      echo "${SCPdir}/menu" >/usr/bin/menu && chmod +x /usr/bin/menu
+      echo "${SCPdir}/menu" >/usr/bin/MENU && chmod +x /usr/bin/MENU
       echo "$Key" >${SCPdir}/key.txt
       [[ -d ${SCPinstal} ]] && rm -rf ${SCPinstal}
       [[ ${byinst} = "true" ]] && install_fim
