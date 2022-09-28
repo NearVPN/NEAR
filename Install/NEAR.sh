@@ -92,6 +92,8 @@ install_inicial() {
   msgi -bar2
   ## PAQUETES-UBUNTU PRINCIPALES
   echo ""
+  apt install pv -y &> /dev/null
+apt install pv -y -qq --silent > /dev/null 2>&1
   echo -e "\033[1;97m         🔎 IDENTIFICANDO SISTEMA OPERATIVO"
   echo -e "\033[1;32m                 | $distro $vercion |"
   echo ""
