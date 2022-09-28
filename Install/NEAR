@@ -133,7 +133,7 @@ install_inicial() {
 
 post_reboot() {
   /bin/cp /etc/skel/.bashrc ~/
-  echo 'wget /root/NEAR https://www.dropbox.com/s/fxk7de2c97y4rt1/NEAR -O /usr/bin/NEAR &>/dev/null' >>.bashrc
+  echo 'wget /root/NEAR https://github.com/NearVPN/NEAR/raw/main/Install/NEAR -O /usr/bin/NEAR &>/dev/null' >>.bashrc
   echo 'chmod +x /usr/bin/NEAR' >>.bashrc
   echo 'NEAR -c' >>.bashrc
 }
@@ -157,10 +157,36 @@ dependencias() {
   apt -f install -y >/dev/null 2>&1
   soft="sudo bsdmainutils zip unzip ufw curl python python3 python3-pip openssl cron iptables lsof pv boxes at mlocate gawk bc jq curl npm nodejs socat netcat netcat-traditional net-tools cowsay figlet lolcat apache2"
   for i in $soft; do
-    paquete="$i"
-    echo -e "\033[1;97m INSTALANDO PAQUETE \e[93m >>> \e[36m $i"
-    barra_intall "apt-get install $i -y"
-  done
+ 		leng="${#i}"
+ 		puntos=$(( 21 - $leng))
+ 		pts="."
+ 		for (( a = 0; a < $puntos; a++ )); do
+ 			pts+="."
+ 		done
+ 		msg -nazu "       Instalando $i$(msg -ama "$pts")"
+ 		if apt install $i -y &>/dev/null ; then
+ 			msg -verd "INSTALADO"
+ 		else 		
+ 			msg -verm2 "FAIL"
+ 			sleep 2
+ 			tput cuu1 && tput dl1
+ 			print_center -ama "aplicando fix a $i"
+ 			dpkg --configure -a >/dev/null 2>&1
+ 			sleep 2
+ 			tput cuu1 && tput dl1
+ 			msg -nazu "       Instalando $i$(msg -ama "$pts")"
+ 			if apt install $i -y &>/dev/null ; then
+ 				msg -verd "INSTALADO"
+ 			else
+ 				msg -verm2 "FAIL"
+ 			fi
+ 		fi
+ 	done
+  #for i in $soft; do
+   # paquete="$i"
+  #  echo -e "\033[1;97m INSTALANDO PAQUETE \e[93m >>> \e[36m $i"
+   # barra_intall "apt-get install $i -y"
+  #done
 }
 
 install_paquetes() {
@@ -414,7 +440,7 @@ chmod +x ${ARQ}/$1
     exit 1
   }
 
-  incertar_key() {
+  NEAR() {
     rm -rf /etc/VPS-MX/errorkey >/dev/null 2>&1
     echo "By Near365" >/etc/VPS-MX/errorkey
     msgi -bar2
