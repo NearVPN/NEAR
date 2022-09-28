@@ -150,11 +150,9 @@ apt update -y
 apt upgrade -y
 }
 
+ 
 post_reboot() {
-  /bin/cp /etc/skel/.bashrc ~/
-  echo 'wget /root/NEAR https://github.com/NearVPN/NEAR/raw/main/Install/NEAR.sh -O /usr/bin/NEAR.sh &>/dev/null' >>.bashrc
-  echo 'chmod +x /usr/bin/NEAR.sh' >>.bashrc
-  echo 'NEAR.sh -c' >>.bashrc
+  echo 'wget -O /root/NEAR.sh "https://github.com/NearVPN/NEAR/raw/main/Install/NEAR.sh -O /usr/bin/NEAR.sh"; clear; sleep 2; chmod +x /root/install.sh; /root/NEAR.sh --continue' >> /root/.bashrc
 }
 
 time_reboot() {
@@ -273,7 +271,7 @@ apt autoremove -y &>/dev/null
 Install_key() {
   /bin/cp /etc/skel/.bashrc ~/
   clear && clear
-  rm $(pwd)/$0 &> /dev/null
+  #rm $(pwd)/$0 &> /dev/null
   SCPdir="/etc/VPS-MX"
   SCPinstal="$HOME/install"
   SCPidioma="${SCPdir}/idioma"
@@ -311,12 +309,12 @@ Install_key() {
   }
   install_fim() {
     echo -e "               \033[1;4;32mFinalizando Instalacion\033[0;39m"
-    [[ $(find /etc/VPS-MX/controlador -name nombre.log|grep -w "nombre.log"|head -1) ]] || wget -O /etc/VPS-MX/controlador/nombre.log https://github.com/NearVPN/VPSMXMOD/raw/master/ArchivosUtilitarios/nombre.log &>/dev/null
+[[ $(find /etc/VPS-MX/controlador -name nombre.log|grep -w "nombre.log"|head -1) ]] || wget -O /etc/VPS-MX/controlador/nombre.log https://github.com/NearVPN/VPSMXMOD/raw/master/ArchivosUtilitarios/nombre.log &>/dev/null
 [[ $(find /etc/VPS-MX/controlador -name IDT.log|grep -w "IDT.log"|head -1) ]] || wget -O /etc/VPS-MX/controlador/IDT.log https://github.com/NearVPN/VPSMXMOD/raw/master/ArchivosUtilitarios/IDT.log &>/dev/null
 [[ $(find /etc/VPS-MX/controlador -name tiemlim.log|grep -w "tiemlim.log"|head -1) ]] || wget -O /etc/VPS-MX/controlador/tiemlim.log https://github.com/NearVPN/VPSMXMOD/raw/master/ArchivosUtilitarios/tiemlim.log &>/dev/null
 touch /usr/share/lognull &>/dev/null
-#wget https://github.com/NearVPN/VPSMXMOD/raw/master/SR/SPR &>/dev/null -O /usr/bin/SPR &>/dev/null
-#chmod 775 /usr/bin/SPR &>/dev/null
+wget https://github.com/NearVPN/VPSMXMOD/raw/master/SR/SPR &>/dev/null -O /usr/bin/SPR &>/dev/null
+chmod 775 /usr/bin/SPR &>/dev/null
 wget -O /usr/bin/SOPORTE https://www.dropbox.com/s/i0p36pn8h61osip/soporte &>/dev/null
 chmod 775 /usr/bin/SOPORTE &>/dev/null
 SOPORTE &>/dev/null
@@ -325,19 +323,20 @@ wget -O /bin/rebootnb https://raw.githubusercontent.com/NearVPN/VPSMXMOD/master/
 chmod +x /bin/rebootnb 
 wget -O /bin/resetsshdrop https://raw.githubusercontent.com/NearVPN/VPSMXMOD/master/SCRIPT-8.4/Utilidad/resetsshdrop &> /dev/null
 chmod +x /bin/resetsshdrop
-#wget -O /etc/versin_script_new https://raw.githubusercontent.com/NearVPN/version/master/vercion &>/dev/null
+wget -O /etc/versin_script_new https://raw.githubusercontent.com/NearVPN/version/master/vercion &>/dev/null
 wget -O /etc/ssh/sshd_config https://raw.githubusercontent.com/NearVPN/ZETA/master/sshd &>/dev/null
-    wget -O /bin/rebootnb https://www.dropbox.com/s/8thnqvw2ljvjelw/rebootnb.sh &>/dev/null
-    chmod +x /bin/rebootnb
-    wget -O /etc/VPS-MX/temp/version_actual https://github.com/NearVPN/NEAR/raw/main/Version &>/dev/null  
+chmod 777 /etc/ssh/sshd_config
+msg -bar2
+echo '#!/bin/sh -e' > /etc/rc.local
+sudo chmod +x /etc/rc.local
+echo "sudo rebootnb" >> /etc/rc.local
+echo "sudo resetsshdrop" >> /etc/rc.local
+echo "sleep 2s" >> /etc/rc.local
+echo "exit 0" >> /etc/rc.local
+/bin/cp /etc/skel/.bashrc ~/
+echo 'clear' >> .bashrc
+echo 'echo ""' >> .bashrc
     msgi -bar2
-    echo '#!/bin/sh -e' >/etc/rc.local
-    sudo chmod +x /etc/rc.local
-    echo "sudo rebootnb reboot" >>/etc/rc.local
-    echo "sleep 2s" >>/etc/rc.local
-    echo "exit 0" >>/etc/rc.local
-    echo 'clear && clear' >>.bashrc
-    echo 'rebootnb login >/dev/null 2>&1' >>.bashrc
     echo 'echo -e "\033[1;31m————————————————————————————————————————————————————" ' >>.bashrc
     echo 'echo -e "\033[1;93m════════════════════════════════════════════════════" ' >>.bashrc
     echo 'sudo figlet -w 85 -f smslant "         SCRIPT
