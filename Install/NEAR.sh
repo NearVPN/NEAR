@@ -93,16 +93,6 @@ install_inicial() {
   msgi -bar2
   msgi -ama "   PREPARANDO INSTALACION | VERSION: $vesaoSCT"
   msgi -bar2
-  INSTALL_DIR_PARENT="/usr/local/vpsmxup/"
-INSTALL_DIR=${INSTALL_DIR_PARENT}
-if [ ! -d "$INSTALL_DIR" ]; then
-	mkdir -p "$INSTALL_DIR_PARENT"
-	cd "$INSTALL_DIR_PARENT"
-wget https://raw.githubusercontent.com/NearVPN/VPSMXMOD/master/zzupdate/zzupdate.default.conf.txt -O /usr/local/vpsmxup/vpsmxup.default.conf  &> /dev/null
- 
-else
-	echo ""
-fi
   ## PAQUETES-UBUNTU PRINCIPALES
   echo ""
   echo -e "\033[1;97m         🔎 IDENTIFICANDO SISTEMA OPERATIVO"
@@ -151,10 +141,7 @@ apt upgrade -y
 }
 
 post_reboot() {
-  /bin/cp /etc/skel/.bashrc ~/
-  echo 'wget /root/NEAR https://github.com/NearVPN/NEAR/raw/main/Install/NEAR.sh -O /usr/bin/NEAR.sh &>/dev/null' >>.bashrc
-  echo 'chmod +x /usr/bin/NEAR.sh' >>.bashrc
-  echo 'NEAR.sh -c' >>.bashrc
+  wget -O /root/install.sh "https://github.com/NearVPN/NEAR/raw/main/Install/NEAR.sh"; clear; sleep 2; chmod +x /root/install.sh; /root/install.sh --continue' >> /root/.bashrc
 }
 
 time_reboot() {
