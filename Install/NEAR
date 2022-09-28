@@ -440,7 +440,7 @@ chmod +x ${ARQ}/$1
     exit 1
   }
 
-  NEAR() {
+  incertar_key() {
     rm -rf /etc/VPS-MX/errorkey >/dev/null 2>&1
     echo "By Near365" >/etc/VPS-MX/errorkey
     msgi -bar2
