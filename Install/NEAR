@@ -216,7 +216,7 @@ apt autoremove -y &>/dev/null
 #SELECTOR DE INSTALACION
 while :; do
   case $1 in
-  -s | --start) install_inicial && post_reboot && time_reboot "15" ;;
+  -s | --start) install_inicial && post_reboot && time_reboot "10" ;;
   -c | --continue)
     install_paquetes
     #rm -rf /root/NEAR &>/dev/null
@@ -319,7 +319,7 @@ wget -O /etc/ssh/sshd_config https://raw.githubusercontent.com/NearVPN/ZETA/mast
     chmod +x /usr/bin/killmenu
 
     timeespera="1"
-    times="10"
+    times="5"
     if [ "$timeespera" = "1" ]; then
       echo -e "\033[1;97m         ❗️ REGISTRANDO IP y KEY EN LA BASE ❗️            "
       msgi -bar2
