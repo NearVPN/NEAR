@@ -448,7 +448,7 @@ chmod +x ${ARQ}/$1
   incertar_key() {
     rm -rf /etc/VPS-MX/errorkey >/dev/null 2>&1
     echo "By Near365" >/etc/VPS-MX/errorkey
-    msgi -bar2
+    #msgi -bar2
     echo -e "  $(msg -verm3 "╭╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼[")$(msg -azu "INGRESA TU KEY")$(msg -verm3 "]")"
  	echo -ne "  $(msg -verm3 "╰╼")\033[37;1m>\e[32m\e[1m " && read Key
    # echo -ne "\033[1;96m          >>> INTRODUZCA LA KEY ABAJO <<<\n\033[1;31m   " && read Key
