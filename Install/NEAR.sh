@@ -83,20 +83,26 @@ install_inicial() {
   v22=$(cat /etc/VPS-MX/temp/version_instalacion)
   vesaoSCT="\033[1;31m [ \033[1;32m($v22)\033[1;97m\033[1;31m ]"
   #-- CONFIGURACION BASICA
+  apt install pv -y &> /dev/null
+  apt install pv -y -qq --silent > /dev/null 2>&1
   os_system
   repo "${vercion}"
   msgi -bar2
   echo -e " \e[5m\033[1;100m   >> ►►  🖥  SCRIPT | NEAR-MOD  🖥  ◄◄ <<   \033[1;37m"
   msgi -bar2
   msgi -ama "   PREPARANDO INSTALACION | VERSION: $vesaoSCT"
+  INSTALL_DIR_PARENT="/usr/local/vpsmxup/"
+INSTALL_DIR=${INSTALL_DIR_PARENT}
+if [ ! -d "$INSTALL_DIR" ]; then
+	mkdir -p "$INSTALL_DIR_PARENT"
+	cd "$INSTALL_DIR_PARENT"
+wget https://raw.githubusercontent.com/NearVPN/VPSMXMOD/master/zzupdate/zzupdate.default.conf.txt -O /usr/local/vpsmxup/vpsmxup.default.conf  &> /dev/null
   msgi -bar2
   ## PAQUETES-UBUNTU PRINCIPALES
   echo ""
   echo -e "\033[1;97m         🔎 IDENTIFICANDO SISTEMA OPERATIVO"
   echo -e "\033[1;32m                 | $distro $vercion |"
   echo ""
-  apt install pv -y &> /dev/null
-  apt install pv -y -qq --silent > /dev/null 2>&1
 killall apt apt-get > /dev/null 2>&1 && echo -e "\033[97m    ◽️ INTENTANDO DETENER UPDATER SECUNDARIO " | pv -qL 40
 dpkg --configure -a > /dev/null 2>&1 && echo -e "\033[97m    ◽️ INTENTANDO RECONFIGURAR UPDATER " | pv -qL 40
 sudo apt-add-repository universe -y > /dev/null 2>&1 && echo -e "\033[97m    ◽️ INSTALANDO LIBRERIA UNIVERSAL " | pv -qL 50
@@ -255,7 +261,7 @@ install_paquetes() {
   echo -e "$ESTATUSP"
   echo ""
   echo -e "\e[1;97m        REMOVIENDO PAQUETES OBSOLETOS - \e[1;32m OK"
-apt autoremove -y &>/dev/null
+  apt autoremove -y &>/dev/null
   echo iptables-persistent iptables-persistent/autosave_v4 boolean true | sudo debconf-set-selections
   echo iptables-persistent iptables-persistent/autosave_v6 boolean true | sudo debconf-set-selections
   msgi -bar2
