@@ -83,6 +83,9 @@ install_inicial() {
   v22=$(cat /etc/VPS-MX/temp/version_instalacion)
   vesaoSCT="\033[1;31m [ \033[1;32m($v22)\033[1;97m\033[1;31m ]"
   #-- CONFIGURACION BASICA
+  echo ""
+  apt install pv -y &> /dev/null
+  apt install pv -y -qq --silent > /dev/null 2>&1
   os_system
   repo "${vercion}"
   msgi -bar2
@@ -103,8 +106,7 @@ fi
   ## PAQUETES-UBUNTU PRINCIPALES
   echo ""
   echo -e "\033[1;97m         🔎 IDENTIFICANDO SISTEMA OPERATIVO"
-  echo -e "\033[1;32m                 | $distro $vercion |"
-  echo ""  
+  echo -e "\033[1;32m                 | $distro $vercion |"  
 killall apt apt-get > /dev/null 2>&1 && echo -e "\033[97m    ◽️ INTENTANDO DETENER UPDATER SECUNDARIO " | pv -qL 40
 dpkg --configure -a > /dev/null 2>&1 && echo -e "\033[97m    ◽️ INTENTANDO RECONFIGURAR UPDATER " | pv -qL 40
 sudo apt-add-repository universe -y > /dev/null 2>&1 && echo -e "\033[97m    ◽️ INSTALANDO LIBRERIA UNIVERSAL " | pv -qL 50
