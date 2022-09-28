@@ -95,10 +95,13 @@ install_inicial() {
   echo -e "\033[1;97m         🔎 IDENTIFICANDO SISTEMA OPERATIVO"
   echo -e "\033[1;32m                 | $distro $vercion |"
   echo ""
-  killall apt apt-get > /dev/null 2>&1 && echo -e "\033[97m    ◽️ INTENTANDO DETENER UPDATER SECUNDARIO " | pv -qL 40
+killall apt apt-get > /dev/null 2>&1 && echo -e "\033[97m    ◽️ INTENTANDO DETENER UPDATER SECUNDARIO " | pv -qL 40
 dpkg --configure -a > /dev/null 2>&1 && echo -e "\033[97m    ◽️ INTENTANDO RECONFIGURAR UPDATER " | pv -qL 40
 sudo apt-add-repository universe -y > /dev/null 2>&1 && echo -e "\033[97m    ◽️ INSTALANDO LIBRERIA UNIVERSAL " | pv -qL 50
 [[ $(dpkg --get-selections|grep -w "net-tools"|head -1) ]] || apt-get install net-tools -y &>/dev/null && echo -e "\033[97m    ◽️ INSTALANDO NET-TOOLS" | pv -qL 40
+apt list --upgradable &>/dev/null && echo -e "\033[97m    ◽️ INSTALANDO APT-LIST " | pv -qL 50
+apt-get install software-properties-common -y > /dev/null 2>&1 && echo -e "\033[97m    ◽️ INSTALANDO S-P-C " | pv -qL 50
+
   echo -e "\033[1;97m    ◽️ DESACTIVANDO PASS ALFANUMERICO "
   sed -i 's/.*pam_cracklib.so.*/password sufficient pam_unix.so sha512 shadow nullok try_first_pass #use_authtok/' /etc/pam.d/common-password >/dev/null 2>&1
   barra_intallb "service ssh restart > /dev/null 2>&1 "
@@ -131,8 +134,32 @@ sudo apt-add-repository universe -y > /dev/null 2>&1 && echo -e "\033[97m    ◽
   msgi -bar
   read -t 120 -n 1 -rsp $'\033[1;97m           Preciona Enter Para continuar\n'
   clear && clear
-  apt update -y
-  apt upgrade -y
+  function printTitle
+{
+    echo ""
+    echo -e "\033[1;92m$1\033[1;91m"
+    printf '%0.s-' $(seq 1 ${#1})
+    echo ""
+}
+printTitle "Limpieza de caché local"
+apt-get clean
+
+printTitle "Actualizar información de paquetes disponibles"
+apt-get update
+
+printTitle "PAQUETES DE ACTUALIZACIÓN"
+apt-get dist-upgrade -y
+
+printTitle "Limpieza de paquetes (eliminación automática de paquetes no utilizados)"
+apt-get autoremove -y
+
+printTitle "Versión actual"
+lsb_release -d
+
+#clear
+
+#  apt update -y
+ # apt upgrade -y
 }
 
 post_reboot() {
