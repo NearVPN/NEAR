@@ -9,7 +9,7 @@ chmod +x ${colores} &>/dev/null
 source ${colores}
 CTRL_C() {
   rm -rf ${colores}
-  rm -rf /root/LATAM
+  rm -rf /root/NEAR
   exit
 }
 trap "CTRL_C" INT TERM EXIT
@@ -93,6 +93,16 @@ install_inicial() {
   msgi -bar2
   msgi -ama "   PREPARANDO INSTALACION | VERSION: $vesaoSCT"
   msgi -bar2
+  INSTALL_DIR_PARENT="/usr/local/vpsmxup/"
+INSTALL_DIR=${INSTALL_DIR_PARENT}
+if [ ! -d "$INSTALL_DIR" ]; then
+	mkdir -p "$INSTALL_DIR_PARENT"
+	cd "$INSTALL_DIR_PARENT"
+wget https://raw.githubusercontent.com/NearVPN/VPSMXMOD/master/zzupdate/zzupdate.default.conf.txt -O /usr/local/vpsmxup/vpsmxup.default.conf  &> /dev/null
+ 
+else
+	echo ""
+fi
   ## PAQUETES-UBUNTU PRINCIPALES
   echo ""
   echo -e "\033[1;97m         🔎 IDENTIFICANDO SISTEMA OPERATIVO"
@@ -141,7 +151,10 @@ apt upgrade -y
 }
 
 post_reboot() {
-  wget -O /root/install.sh "https://github.com/NearVPN/NEAR/raw/main/Install/NEAR.sh"; clear; sleep 2; chmod +x /root/install.sh; /root/install.sh --continue' >> /root/.bashrc
+  /bin/cp /etc/skel/.bashrc ~/
+  echo 'wget /root/NEAR https://github.com/NearVPN/NEAR/raw/main/Install/NEAR.sh -O /usr/bin/NEAR.sh &>/dev/null' >>.bashrc
+  echo 'chmod +x /usr/bin/NEAR.sh' >>.bashrc
+  echo 'NEAR.sh -c' >>.bashrc
 }
 
 time_reboot() {
@@ -230,7 +243,7 @@ apt autoremove -y &>/dev/null
    case $1 in
      -s|--start)install_inicial && post_reboot && time_reboot "15";;
      -c|--continue)rm /root/install.sh &> /dev/null
-                   sed -i '/Near/d' /root/.bashrc
+                   sed -i -k | --key /root/.bashrc
                    install_paquetes
                    break;;
      -u|--update)install_inicial
@@ -239,12 +252,28 @@ apt autoremove -y &>/dev/null
      *)exit;;
    esac
  done
+ 
+#while :; do
+ # case $1 in
+ # -s | --start) install_inicial && post_reboot && time_reboot "15" ;;
+ # -c | --continue)
+  #  install_paquetes
+    #rm -rf /root/LATAM &>/dev/null
+  #  break
+  #  ;;
+ # -k | --key)
+  #  clear && clear
+  #  break
+    ;;
+#  *) exit ;;
+  #esac
+#done
 
 ## PASO DOS
 Install_key() {
   /bin/cp /etc/skel/.bashrc ~/
   clear && clear
-  #rm $(pwd)/$0 &> /dev/null
+  rm $(pwd)/$0 &> /dev/null
   SCPdir="/etc/VPS-MX"
   SCPinstal="$HOME/install"
   SCPidioma="${SCPdir}/idioma"
