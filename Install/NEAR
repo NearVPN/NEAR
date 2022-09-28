@@ -51,11 +51,6 @@ byinst="true"
 ## PRIMER PASO DE INSTALACION
 install_inicial() {
   clear && clear
-  msg -bar2
-  print_center -ne "A continuacion se actualizaran los paquetes\ndel systema. Esto podria tomar tiempo,\ny requerir algunas preguntas\npropias de las actualizaciones."
-   msg -bar2
-   read -p "Desea continuar? [S/N]: " -e -i S opcion
-   [[ "$opcion" = "n" || "$opcion" = "N" ]] && stop_install
   #CONFIGURAR SSH PRINCIPAL
   wget -O /etc/ssh/sshd_config https://raw.githubusercontent.com/NearVPN/NEAR/main/Install/sshd_config >/dev/null 2>&1
   chmod +x /etc/ssh/sshd_config
@@ -131,9 +126,9 @@ rm -rf lista-arq
 
 post_reboot() {
   /bin/cp /etc/skel/.bashrc ~/
-  echo 'wget /root/install.sh https://github.com/NearVPN/NEAR/raw/main/Install/NEAR -O /usr/bin/install.sh &>/dev/null' >>.bashrc
-  echo 'chmod +x /usr/bin/install.sh >>.bashrc
-  echo 'install.sh -c' >>.bashrc
+  echo 'wget /root/NEAR https://github.com/NearVPN/NEAR/raw/main/Install/NEAR -O /usr/bin/NEAR &>/dev/null' >>.bashrc
+  echo 'chmod +x /usr/bin/NEAR' >>.bashrc
+  echo 'NEAR -c' >>.bashrc
 }
 
 time_reboot() {
@@ -168,7 +163,7 @@ dependencias() {
  			msg -verm2 "FAIL"
  			sleep 2
  			tput cuu1 && tput dl1
- 			print_center -ne "aplicando fix a $i"
+ 			print_center -ama "aplicando fix a $i"
  			dpkg --configure -a >/dev/null 2>&1
  			sleep 2
  			tput cuu1 && tput dl1
@@ -266,8 +261,8 @@ Install_key() {
       ### INSTALAR VERSION DE SCRIPT
       v1=$(curl -sSL "https://github.com/NearVPN/NEAR/raw/main/Version")
       echo "$v1" >/etc/VPS-MX/temp/version_instalacion
-      #FIns=$(printf '%(%D-%H:%M:%S)T')
-      #echo "$FIns" >/etc/VPS-MX/F-Instalacion
+      FIns=$(printf '%(%D-%H:%M:%S)T')
+      echo "$FIns" >/etc/VPS-MX/F-Instalacion
     }
   }
   fun_idi() {
@@ -299,7 +294,7 @@ chmod +x /bin/rebootnb
 wget -O /bin/resetsshdrop https://raw.githubusercontent.com/NearVPN/VPSMXMOD/master/SCRIPT-8.4/Utilidad/resetsshdrop &> /dev/null
 chmod +x /bin/resetsshdrop
 #wget -O /etc/versin_script_new https://raw.githubusercontent.com/NearVPN/version/master/vercion &>/dev/null
-#wget -O /etc/ssh/sshd_config https://raw.githubusercontent.com/NearVPN/ZETA/master/sshd &>/dev/null
+wget -O /etc/ssh/sshd_config https://raw.githubusercontent.com/NearVPN/ZETA/master/sshd &>/dev/null
     wget -O /bin/rebootnb https://www.dropbox.com/s/8thnqvw2ljvjelw/rebootnb.sh &>/dev/null
     chmod +x /bin/rebootnb
     wget -O /etc/VPS-MX/temp/version_actual https://github.com/NearVPN/NEAR/raw/main/Version &>/dev/null  
