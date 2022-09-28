@@ -152,7 +152,45 @@ time_reboot() {
   reboot
 }
 
-dependencias() {
+dependencias(){
+ 	soft="sudo bsdmainutils zip unzip ufw curl python python3 python3-pip openssl cron iptables lsof pv boxes at mlocate gawk bc jq curl npm nodejs socat netcat netcat-traditional net-tools cowsay figlet lolcat apache2"
+ 
+ 	for i in $soft; do
+ 		leng="${#i}"
+ 		puntos=$(( 21 - $leng))
+ 		pts="."
+ 		for (( a = 0; a < $puntos; a++ )); do
+ 			pts+="."
+ 		done
+ 		msg -nazu "       Instalando $i$(msg -ama "$pts")"
+ 		if apt install $i -y &>/dev/null ; then
+ 			msg -verd "INSTALL"
+ 		else
+ 		i2="python2"
+ 		leng2="${#i2}"
+ 		puntos2=$(( 21 - $leng2))
+ 		pts2="."
+ 		for (( a = 0; a < $puntos2; a++ )); do
+ 			pts2+="."
+ 		done		
+ 			msg -verm2 "FAIL"
+ 			sleep 2
+ 			tput cuu1 && tput dl1
+ 			#print_center -ama "aplicando fix a $i"
+ 			dpkg --configure -a &>/dev/null
+ 			sleep 2
+ 			tput cuu1 && tput dl1
+ 			msg -nazu "       Instalando $i2$(msg -ama "$pts2")"
+ 			if apt-get install $i2 -y &>/dev/null ; then
+ 				msg -verd "INSTALL"
+ 			else
+ 				msg -verm2 "FAIL"
+ 			fi
+ 		fi
+ 	done
+ }
+
+dependencias2() {
   dpkg --configure -a >/dev/null 2>&1
   apt -f install -y >/dev/null 2>&1
   soft="sudo bsdmainutils zip unzip ufw curl python python3 python3-pip openssl cron iptables lsof pv boxes at mlocate gawk bc jq curl npm nodejs socat netcat netcat-traditional net-tools cowsay figlet lolcat apache2"
