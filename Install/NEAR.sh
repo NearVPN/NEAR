@@ -244,7 +244,7 @@ apt autoremove -y &>/dev/null
 Install_key() {
   /bin/cp /etc/skel/.bashrc ~/
   clear && clear
-  rm $(pwd)/$0 &> /dev/null
+  #rm $(pwd)/$0 &> /dev/null
   SCPdir="/etc/VPS-MX"
   SCPinstal="$HOME/install"
   SCPidioma="${SCPdir}/idioma"
