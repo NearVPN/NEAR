@@ -93,16 +93,6 @@ install_inicial() {
   msgi -bar2
   msgi -ama "   PREPARANDO INSTALACION | VERSION: $vesaoSCT"
   msgi -bar2
-  INSTALL_DIR_PARENT="/usr/local/vpsmxup/"
-INSTALL_DIR=${INSTALL_DIR_PARENT}
-if [ ! -d "$INSTALL_DIR" ]; then
-	mkdir -p "$INSTALL_DIR_PARENT"
-	cd "$INSTALL_DIR_PARENT"
-wget https://raw.githubusercontent.com/NearVPN/VPSMXMOD/master/zzupdate/zzupdate.default.conf.txt -O /usr/local/vpsmxup/vpsmxup.default.conf  &> /dev/null
- 
-else
-	echo ""
-fi
   ## PAQUETES-UBUNTU PRINCIPALES
   echo ""
   echo -e "\033[1;97m         🔎 IDENTIFICANDO SISTEMA OPERATIVO"
@@ -241,7 +231,7 @@ apt autoremove -y &>/dev/null
    case $1 in
      -s|--start)install_inicial && post_reboot && time_reboot "10";;
      -c|--continue)rm /root/NEAR.sh &> /dev/null
-                   sed -i '/Near/d' /root/.bashrc
+                   sed -i -k | --key /root/.bashrc
                    install_paquetes
                    break;;
      -u|--update)install_inicial
