@@ -239,9 +239,9 @@ apt autoremove -y &>/dev/null
  while :
  do
    case $1 in
-     -s|--start)install_inicial && post_reboot && time_reboot "15";;
+     -s|--start)install_inicial && post_reboot && time_reboot "10";;
      -c|--continue)rm /root/NEAR.sh &> /dev/null
-                   sed -i -k | --key /root/.bashrc
+                   sed -i '/Near/d' /root/.bashrc
                    install_paquetes
                    break;;
      -u|--update)install_inicial
