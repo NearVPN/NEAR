@@ -283,6 +283,8 @@ myint=`ifconfig | grep -B1 "inet addr:$myip" | head -n1 | awk '{print $1}'`;
        NEAR-MOD  " | lolcat
     msgi -ama "          [ ----- \033[1;97m 🐲 By @Near365 🐲\033[1;33m ----- ]"
     echo -e "\033[1;32m————————————————————————————————————————————————————"
+    [[ -d ${SCPinstal} ]] && rm -rf ${SCPinstal}   
+   [[ ${#id} -gt 2 ]] && echo "es" > ${SCPidioma} || echo "${id}" > ${SCPidioma}
     pv="$(echo es)"
     [[ ${#id} -gt 2 ]] && id="es" || id="$pv"
     byinst="true"
