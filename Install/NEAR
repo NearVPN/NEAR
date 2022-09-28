@@ -63,33 +63,6 @@ install_inicial() {
   mkdir -p /etc/VPS-MX/herramientas >/dev/null 2>&1
   mkdir -p /etc/VPS-MX/protocolos >/dev/null 2>&1
   mkdir -p /etc/VPS-MX/temp >/dev/null 2>&1
-  #--VERIFICAR IP MANUAL
-  tu_ip() {
-    echo ""
-    echo -ne "\033[1;96m #Digite tu IP Publica (IPV4): \033[32m" && read IP
-    val_ip() {
-      local ip=$IP
-      local stat=1
-      if [[ $ip =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
-        OIFS=$IFS
-        IFS='.'
-        ip=($ip)
-        IFS=$OIFS
-        [[ ${ip[0]} -le 255 && ${ip[1]} -le 255 && ${ip[2]} -le 255 && ${ip[3]} -le 255 ]]
-        stat=$?
-      fi
-      return $stat
-    }
-    if val_ip $IP; then
-      echo "$IP" >/root/.ssh/authrized_key.reg
-    else
-      echo ""
-      echo -e "\033[31mLa IP Digitada no es valida, Verifiquela"
-      echo ""
-      sleep 5s
-      fun_ip
-    fi
-  }
   #-- VERIFICAR VERSION
   v1=$(curl -sSL "https://github.com/NearVPN/NEAR/raw/main/Version")
   echo "$v1" >/etc/VPS-MX/temp/version_instalacion
@@ -102,44 +75,48 @@ install_inicial() {
   echo -e " \e[5m\033[1;100m   ===>> ►►  🖥  SCRIPT | NEAR-MOD  🖥  ◄◄ <<===   \033[1;37m"
   msgi -bar2
   msgi -ama "   PREPARANDO INSTALACION | VERSION: $vesaoSCT"
-  msgi -bar2
+  msg -bar2
+INSTALL_DIR_PARENT="/usr/local/vpsmxup/"
+INSTALL_DIR=${INSTALL_DIR_PARENT}
+if [ ! -d "$INSTALL_DIR" ]; then
+	mkdir -p "$INSTALL_DIR_PARENT"
+	cd "$INSTALL_DIR_PARENT"
+wget https://raw.githubusercontent.com/NearVPN/VPSMXMOD/master/zzupdate/zzupdate.default.conf.txt -O /usr/local/vpsmxup/vpsmxup.default.conf  &> /dev/null
+ 
+else
+	echo ""
+fi
+echo ""
+#by kalix1
+apt install pv -y &> /dev/null
+apt install pv -y -qq --silent > /dev/null 2>&1
   ## PAQUETES-UBUNTU PRINCIPALES
-  echo ""
   echo -e "\033[1;97m         🔎 IDENTIFICANDO SISTEMA OPERATIVO"
   echo -e "\033[1;32m                 | $distro $vercion |"
   echo ""
-  echo -e "\033[1;97m    ◽️ DESACTIVANDO PASS ALFANUMERICO "
-  sed -i 's/.*pam_cracklib.so.*/password sufficient pam_unix.so sha512 shadow nullok try_first_pass #use_authtok/' /etc/pam.d/common-password >/dev/null 2>&1
+  killall apt apt-get > /dev/null 2>&1 && echo -e "\033[97m    ◽️ INTENTANDO DETENER UPDATER SECUNDARIO " | pv -qL 40
+dpkg --configure -a > /dev/null 2>&1 && echo -e "\033[97m    ◽️ INTENTANDO RECONFIGURAR UPDATER " | pv -qL 40
+apt list --upgradable &>/dev/null && echo -e "\033[97m    ◽️ INSTALANDO APT-LIST " | pv -qL 50
+
+apt-get install software-properties-common -y > /dev/null 2>&1 && echo -e "\033[97m    ◽️ INSTALANDO S-P-C " | pv -qL 50
+apt-get install curl -y &>/dev/null
+apt install python -y &>/dev/null && echo -e "\033[97m    ◽️ INSTALANDO PY " | pv -qL 50
+apt-get install python-pip -y &>/dev/null && echo -e "\033[97m    ◽️ INSTALANDO PY-PIP " | pv -qL 50
+apt-get install python3 -y &>/dev/null && echo -e "\033[97m    ◽️ INSTALANDO PY3 " | pv -qL 50
+apt-get install python3-pip -y &>/dev/null && echo -e "\033[97m    ◽️ INSTALANDO PY3-PIP " | pv -qL 50
+
+sudo apt-add-repository universe -y > /dev/null 2>&1 && echo -e "\033[97m    ◽️ INSTALANDO LIBRERIA UNIVERSAL " | pv -qL 50
+[[ $(dpkg --get-selections|grep -w "net-tools"|head -1) ]] || apt-get install net-tools -y &>/dev/null && echo -e "\033[97m    ◽️ INSTALANDO NET-TOOLS" | pv -qL 40
+sed -i 's/.*pam_cracklib.so.*/password sufficient pam_unix.so sha512 shadow nullok try_first_pass #use_authtok/' /etc/pam.d/common-password > /dev/null 2>&1 && echo -e "\033[97m    ◽️ DESACTIVANDO PASS ALFANUMERICO " | pv -qL 50
+apt-get install lsof -y &>/dev/null && echo -e "\033[97m    ◽️ INSTALANDO LSOF" | pv -qL 40
+apt-get install sudo -y &>/dev/null && echo -e "\033[97m    ◽️ INSTALANDO SUDO" | pv -qL 40
+apt-get install bc -y &>/dev/null && echo -e "\033[97m    ◽️ INSTALANDO BC" | pv -qL 40
   barra_intallb "service ssh restart > /dev/null 2>&1 "
-  echo ""
-  msgi -bar2
-  fun_ip() {
-    TUIP=$(wget -qO- ifconfig.me)
-    echo "$TUIP" >/root/.ssh/authrized_key.reg
-    echo -e "\033[1;97m ESTA ES TU IP PUBLICA? \033[32m$TUIP"
-    msgi -bar2
-    echo -ne "\033[1;97m Seleccione  \033[1;31m[\033[1;93m S \033[1;31m/\033[1;93m N \033[1;31m]\033[1;97m: \033[1;93m" && read tu_ip
-    #read -p " Seleccione [ S / N ]: " tu_ip
-    [[ "$tu_ip" = "n" || "$tu_ip" = "N" ]] && tu_ip
-  }
-  fun_ip
-  msgi -bar2
-  echo -e "\033[1;93m             AGREGAR Y EDITAR PASS ROOT\033[1;97m"
-  msgi -bar
-  echo -ne "\033[1;97m DIGITE NUEVA CONTRASEÑA:  \033[1;31m" && read pass
-  (
-    echo $pass
-    echo $pass
-  ) | passwd root 2>/dev/null
-  sleep 1s
-  msgi -bar
-  echo -e "\033[1;94m     CONTRASEÑA AGREGADA O EDITADA CORECTAMENTE"
-  echo -e "\033[1;97m TU CONTRASEÑA ROOT AHORA ES: \e[41m $pass \033[0;37m"
-  msgi -bar2
-  echo -e "\033[1;93m\a\a\a      SE PROCEDERA A INSTALAR LAS ACTULIZACIONES\n PERTINENTES DEL SISTEMA, ESTE PROCESO PUEDE TARDAR\n VARIOS MINUTOS Y PUEDE PEDIR ALGUNAS CONFIRMACIONES \033[0;37m"
-  msgi -bar
+  
   read -t 120 -n 1 -rsp $'\033[1;97m           Preciona Enter Para continuar\n'
   clear && clear
+rm -rf /usr/bin/vpsmxup
+rm -rf lista-arq
   apt update -y
   apt upgrade -y
 }
