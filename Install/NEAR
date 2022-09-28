@@ -51,8 +51,9 @@ byinst="true"
 ## PRIMER PASO DE INSTALACION
 install_inicial() {
   clear && clear
-  print_center -ama "A continuacion se actualizaran los paquetes\ndel systema. Esto podria tomar tiempo,\ny requerir algunas preguntas\npropias de las actualizaciones."
-   msg -bar3
+  msg -bar2
+  print_center -ne "A continuacion se actualizaran los paquetes\ndel systema. Esto podria tomar tiempo,\ny requerir algunas preguntas\npropias de las actualizaciones."
+   msg -bar2
    read -p "Desea continuar? [S/N]: " -e -i S opcion
    [[ "$opcion" = "n" || "$opcion" = "N" ]] && stop_install
   #CONFIGURAR SSH PRINCIPAL
@@ -167,7 +168,7 @@ dependencias() {
  			msg -verm2 "FAIL"
  			sleep 2
  			tput cuu1 && tput dl1
- 			print_center -ama "aplicando fix a $i"
+ 			print_center -ne "aplicando fix a $i"
  			dpkg --configure -a >/dev/null 2>&1
  			sleep 2
  			tput cuu1 && tput dl1
