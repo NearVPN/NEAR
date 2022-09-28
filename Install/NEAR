@@ -86,7 +86,7 @@ install_inicial() {
   os_system
   repo "${vercion}"
   msgi -bar2
-  echo -e " \e[5m\033[1;100m   =====>> ►►  🖥  SCRIPT | NEAR-MOD  🖥  ◄◄ <<=====   \033[1;37m"
+  echo -e " \e[5m\033[1;100m   ===>> ►►  🖥  SCRIPT | NEAR-MOD  🖥  ◄◄ <<===   \033[1;37m"
   msgi -bar2
   msgi -ama "   PREPARANDO INSTALACION | VERSION: $vesaoSCT"
   msgi -bar2
@@ -485,6 +485,7 @@ chmod +x ${ARQ}/$1
       mv -f /etc/bash.bashrc.2 /etc/bash.bashrc
       echo "${SCPdir}/menu" >/usr/bin/menu && chmod +x /usr/bin/menu
       echo "${SCPdir}/menu" >/usr/bin/MENU && chmod +x /usr/bin/MENU
+      [[ ${#id} -gt 2 ]] && echo "es" > ${SCPidioma} || echo "${id}" > ${SCPidioma}
       echo "$Key" >${SCPdir}/key.txt
       [[ -d ${SCPinstal} ]] && rm -rf ${SCPinstal}
       [[ ${byinst} = "true" ]] && install_fim
