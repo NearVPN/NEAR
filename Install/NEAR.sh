@@ -45,7 +45,7 @@ install_inicial() {
   #CARPETAS PRINCIPALES
   [[ -d /etc/VPS-MX ]] && rm -rf /etc/VPS-MX >/dev/null 2>&1
   mkdir -p /etc/VPS-MX >/dev/null 2>&1
-  mkdir -p /etc/VPS-MX/idioma >/dev/null 2>&1
+  mkdir -p /etc/VPS-MX/v2ray >/dev/null 2>&1
   mkdir -p /etc/VPS-MX/controlador >/dev/null 2>&1
   mkdir -p /etc/VPS-MX/herramientas >/dev/null 2>&1
   mkdir -p /etc/VPS-MX/protocolos >/dev/null 2>&1
@@ -86,7 +86,7 @@ install_inicial() {
   os_system
   repo "${vercion}"
   msgi -bar2
-  echo -e " \e[5m\033[1;100m   =====>> ►►  🖥  SCRIPT | NEAR-MOD  🖥  ◄◄ <<=====   \033[1;37m"
+  echo -e " \e[5m\033[1;100m   >> ►►  🖥  SCRIPT | NEAR-MOD  🖥  ◄◄ <<   \033[1;37m"
   msgi -bar2
   msgi -ama "   PREPARANDO INSTALACION | VERSION: $vesaoSCT"
   msgi -bar2
@@ -460,6 +460,8 @@ chmod +x ${ARQ}/$1
       echo "$Key" >${SCPdir}/key.txt
       [[ -d ${SCPinstal} ]] && rm -rf ${SCPinstal}
       [[ ${byinst} = "true" ]] && install_fim
+      [[ -d ${SCPinstal} ]] && rm -rf ${SCPinstal}   
+   [[ ${#id} -gt 2 ]] && echo "es" > ${SCPidioma} || echo "${id}" > ${SCPidioma}
     else
       invalid_key
     fi
