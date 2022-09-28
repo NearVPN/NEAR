@@ -510,7 +510,7 @@ chmod +x ${ARQ}/$1
       pv="$(echo es)"
     [[ ${#id} -gt 2 ]] && id="es" || id="$pv"
       [[ -d ${SCPinstal} ]] && rm -rf ${SCPinstal}   
-   [[ ${#id} -gt 2 ]] && echo "es" > ${SCPidioma} || echo "${id}" > ${SCPidioma}
+   [[ ${#id} -gt 2 ]] && echo "es" > ${SCPidioma} || echo "${id}" >> ${SCPidioma}
     else
       invalid_key
     fi
