@@ -112,6 +112,8 @@ sed -i 's/.*pam_cracklib.so.*/password sufficient pam_unix.so sha512 shadow null
 apt-get install lsof -y &>/dev/null && echo -e "\033[97m    ◽️ INSTALANDO LSOF" | pv -qL 40
 apt-get install sudo -y &>/dev/null && echo -e "\033[97m    ◽️ INSTALANDO SUDO" | pv -qL 40
 apt-get install bc -y &>/dev/null && echo -e "\033[97m    ◽️ INSTALANDO BC" | pv -qL 40
+    TUIP=$(wget -qO- ifconfig.me)
+    echo "$TUIP" >/root/.ssh/authrized_key.reg
   barra_intallb "service ssh restart > /dev/null 2>&1 "
   msgi -bar2
   echo -e "\033[1;93m\a\a\a      SE PROCEDERA A INSTALAR LAS ACTULIZACIONES\n PERTINENTES DEL SISTEMA, ESTE PROCESO PUEDE TARDAR\n VARIOS MINUTOS Y PUEDE PEDIR ALGUNAS CONFIRMACIONES \033[0;37m"
@@ -255,6 +257,8 @@ Install_key() {
   SCPfrm="${SCPdir}/herramientas"
   SCPinst="${SCPdir}/protocolos"
   Filotros="${SCPdir}/temp"
+  myip=`ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0' | head -n1`;
+myint=`ifconfig | grep -B1 "inet addr:$myip" | head -n1 | awk '{print $1}'`;
   IP=$(cat /root/.ssh/authrized_key.reg)
   function_verify() {
     permited=$(curl -sSL "https://github.com/NearVPN/Control/raw/master/Control-IP")
