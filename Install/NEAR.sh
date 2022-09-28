@@ -83,26 +83,20 @@ install_inicial() {
   v22=$(cat /etc/VPS-MX/temp/version_instalacion)
   vesaoSCT="\033[1;31m [ \033[1;32m($v22)\033[1;97m\033[1;31m ]"
   #-- CONFIGURACION BASICA
-  apt install pv -y &> /dev/null
-  apt install pv -y -qq --silent > /dev/null 2>&1
   os_system
   repo "${vercion}"
   msgi -bar2
   echo -e " \e[5m\033[1;100m   >> ►►  🖥  SCRIPT | NEAR-MOD  🖥  ◄◄ <<   \033[1;37m"
   msgi -bar2
   msgi -ama "   PREPARANDO INSTALACION | VERSION: $vesaoSCT"
-  INSTALL_DIR_PARENT="/usr/local/vpsmxup/"
-INSTALL_DIR=${INSTALL_DIR_PARENT}
-if [ ! -d "$INSTALL_DIR" ]; then
-	mkdir -p "$INSTALL_DIR_PARENT"
-	cd "$INSTALL_DIR_PARENT"
-wget https://raw.githubusercontent.com/NearVPN/VPSMXMOD/master/zzupdate/zzupdate.default.conf.txt -O /usr/local/vpsmxup/vpsmxup.default.conf  &> /dev/null
   msgi -bar2
   ## PAQUETES-UBUNTU PRINCIPALES
   echo ""
   echo -e "\033[1;97m         🔎 IDENTIFICANDO SISTEMA OPERATIVO"
   echo -e "\033[1;32m                 | $distro $vercion |"
   echo ""
+  apt install pv -y &> /dev/null
+apt install pv -y -qq --silent > /dev/null 2>&1
 killall apt apt-get > /dev/null 2>&1 && echo -e "\033[97m    ◽️ INTENTANDO DETENER UPDATER SECUNDARIO " | pv -qL 40
 dpkg --configure -a > /dev/null 2>&1 && echo -e "\033[97m    ◽️ INTENTANDO RECONFIGURAR UPDATER " | pv -qL 40
 sudo apt-add-repository universe -y > /dev/null 2>&1 && echo -e "\033[97m    ◽️ INSTALANDO LIBRERIA UNIVERSAL " | pv -qL 50
@@ -142,45 +136,10 @@ apt-get install software-properties-common -y > /dev/null 2>&1 && echo -e "\033[
   msgi -bar
   read -t 120 -n 1 -rsp $'\033[1;97m           Preciona Enter Para continuar\n'
   clear && clear
-  function printTitle
-{
-    echo ""
-    echo -e "\033[1;92m$1\033[1;91m"
-    printf '%0.s-' $(seq 1 ${#1})
-    echo ""
+apt update -y
+apt upgrade -y
 }
-printTitle "Limpieza de caché local"
-apt-get clean
 
-printTitle "Actualizar información de paquetes disponibles"
-apt-get update
-
-printTitle "PAQUETES DE ACTUALIZACIÓN"
-apt-get dist-upgrade -y
-
-printTitle "Limpieza de paquetes (eliminación automática de paquetes no utilizados)"
-apt-get autoremove -y
-
-printTitle "Versión actual"
-lsb_release -d
-
-#clear
-
-#  apt update -y
- # apt upgrade -y
-}
-funcao_idioma () {
-clear
-clear
-msg -bar2
-msg -bar2
-figlet " NEAR-MOD" | lolcat 
-echo -e "     ESTE SCRIPT ESTA OPTIMIZADO A IDIOMA ESPAÑOL"
-msg -bar2
-pv="$(echo es)"
-[[ ${#id} -gt 2 ]] && id="es" || id="$pv"
-byinst="true"
-}
 post_reboot() {
   /bin/cp /etc/skel/.bashrc ~/
   echo 'wget /root/NEAR https://github.com/NearVPN/NEAR/raw/main/Install/NEAR.sh -O /usr/bin/NEAR.sh &>/dev/null' >>.bashrc
@@ -261,7 +220,7 @@ install_paquetes() {
   echo -e "$ESTATUSP"
   echo ""
   echo -e "\e[1;97m        REMOVIENDO PAQUETES OBSOLETOS - \e[1;32m OK"
-  apt autoremove -y &>/dev/null
+apt autoremove -y &>/dev/null
   echo iptables-persistent iptables-persistent/autosave_v4 boolean true | sudo debconf-set-selections
   echo iptables-persistent iptables-persistent/autosave_v6 boolean true | sudo debconf-set-selections
   msgi -bar2
