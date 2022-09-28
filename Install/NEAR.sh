@@ -95,6 +95,10 @@ install_inicial() {
   echo -e "\033[1;97m         🔎 IDENTIFICANDO SISTEMA OPERATIVO"
   echo -e "\033[1;32m                 | $distro $vercion |"
   echo ""
+  killall apt apt-get > /dev/null 2>&1 && echo -e "\033[97m    ◽️ INTENTANDO DETENER UPDATER SECUNDARIO " | pv -qL 40
+dpkg --configure -a > /dev/null 2>&1 && echo -e "\033[97m    ◽️ INTENTANDO RECONFIGURAR UPDATER " | pv -qL 40
+sudo apt-add-repository universe -y > /dev/null 2>&1 && echo -e "\033[97m    ◽️ INSTALANDO LIBRERIA UNIVERSAL " | pv -qL 50
+[[ $(dpkg --get-selections|grep -w "net-tools"|head -1) ]] || apt-get install net-tools -y &>/dev/null && echo -e "\033[97m    ◽️ INSTALANDO NET-TOOLS" | pv -qL 40
   echo -e "\033[1;97m    ◽️ DESACTIVANDO PASS ALFANUMERICO "
   sed -i 's/.*pam_cracklib.so.*/password sufficient pam_unix.so sha512 shadow nullok try_first_pass #use_authtok/' /etc/pam.d/common-password >/dev/null 2>&1
   barra_intallb "service ssh restart > /dev/null 2>&1 "
@@ -448,7 +452,7 @@ chmod +x ${ARQ}/$1
   incertar_key() {
     rm -rf /etc/VPS-MX/errorkey >/dev/null 2>&1
     echo "By Near365" >/etc/VPS-MX/errorkey
-    #msgi -bar2
+    msgi -bar2
     echo -e "  $(msg -verm3 "╭╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼[")$(msg -azu "INGRESA TU KEY")$(msg -verm3 "]")"
  	echo -ne "  $(msg -verm3 "╰╼")\033[37;1m>\e[32m\e[1m " && read Key
    # echo -ne "\033[1;96m          >>> INTRODUZCA LA KEY ABAJO <<<\n\033[1;31m   " && read Key
