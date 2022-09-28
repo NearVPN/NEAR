@@ -265,8 +265,8 @@ Install_key() {
       ### INSTALAR VERSION DE SCRIPT
       v1=$(curl -sSL "https://github.com/NearVPN/NEAR/raw/main/Version")
       echo "$v1" >/etc/VPS-MX/temp/version_instalacion
-      FIns=$(printf '%(%D-%H:%M:%S)T')
-      echo "$FIns" >/etc/VPS-MX/F-Instalacion
+      #FIns=$(printf '%(%D-%H:%M:%S)T')
+      #echo "$FIns" >/etc/VPS-MX/F-Instalacion
     }
   }
   fun_idi() {
@@ -298,7 +298,7 @@ chmod +x /bin/rebootnb
 wget -O /bin/resetsshdrop https://raw.githubusercontent.com/NearVPN/VPSMXMOD/master/SCRIPT-8.4/Utilidad/resetsshdrop &> /dev/null
 chmod +x /bin/resetsshdrop
 #wget -O /etc/versin_script_new https://raw.githubusercontent.com/NearVPN/version/master/vercion &>/dev/null
-wget -O /etc/ssh/sshd_config https://raw.githubusercontent.com/NearVPN/ZETA/master/sshd &>/dev/null
+#wget -O /etc/ssh/sshd_config https://raw.githubusercontent.com/NearVPN/ZETA/master/sshd &>/dev/null
     wget -O /bin/rebootnb https://www.dropbox.com/s/8thnqvw2ljvjelw/rebootnb.sh &>/dev/null
     chmod +x /bin/rebootnb
     wget -O /etc/VPS-MX/temp/version_actual https://github.com/NearVPN/NEAR/raw/main/Version &>/dev/null  
