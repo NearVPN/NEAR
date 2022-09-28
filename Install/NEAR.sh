@@ -92,11 +92,11 @@ install_inicial() {
   msgi -bar2
   ## PAQUETES-UBUNTU PRINCIPALES
   echo ""
-  apt install pv -y &> /dev/null
-apt install pv -y -qq --silent > /dev/null 2>&1
   echo -e "\033[1;97m         🔎 IDENTIFICANDO SISTEMA OPERATIVO"
   echo -e "\033[1;32m                 | $distro $vercion |"
   echo ""
+  apt install pv -y &> /dev/null
+  apt install pv -y -qq --silent > /dev/null 2>&1
 killall apt apt-get > /dev/null 2>&1 && echo -e "\033[97m    ◽️ INTENTANDO DETENER UPDATER SECUNDARIO " | pv -qL 40
 dpkg --configure -a > /dev/null 2>&1 && echo -e "\033[97m    ◽️ INTENTANDO RECONFIGURAR UPDATER " | pv -qL 40
 sudo apt-add-repository universe -y > /dev/null 2>&1 && echo -e "\033[97m    ◽️ INSTALANDO LIBRERIA UNIVERSAL " | pv -qL 50
@@ -136,6 +136,13 @@ apt-get install software-properties-common -y > /dev/null 2>&1 && echo -e "\033[
   msgi -bar
   read -t 120 -n 1 -rsp $'\033[1;97m           Preciona Enter Para continuar\n'
   clear && clear
+  function printTitle
+{
+    echo ""
+    echo -e "\033[1;92m$1\033[1;91m"
+    printf '%0.s-' $(seq 1 ${#1})
+    echo ""
+}
 printTitle "Limpieza de caché local"
 apt-get clean
 
@@ -155,13 +162,6 @@ lsb_release -d
 
 #  apt update -y
  # apt upgrade -y
-}
-  function printTitle
-{
-    echo ""
-    echo -e "\033[1;92m$1\033[1;91m"
-    printf '%0.s-' $(seq 1 ${#1})
-    echo ""
 }
 
 post_reboot() {
