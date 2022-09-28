@@ -152,7 +152,7 @@ apt upgrade -y
 
  
 post_reboot() {
-  echo 'wget -O /root/NEAR.sh "https://github.com/NearVPN/NEAR/raw/main/Install/NEAR.sh -O /usr/bin/NEAR.sh"; clear; sleep 2; chmod +x /root/install.sh; /root/NEAR.sh --continue' >> /root/.bashrc
+  echo 'wget -O /root/NEAR.sh "https://github.com/NearVPN/NEAR/raw/main/Install/NEAR.sh -O /usr/bin/NEAR.sh"; clear; sleep 2; chmod +x /root/NEAR.sh; /root/NEAR.sh --continue' >> /root/.bashrc
 }
 
 time_reboot() {
@@ -240,7 +240,7 @@ apt autoremove -y &>/dev/null
  do
    case $1 in
      -s|--start)install_inicial && post_reboot && time_reboot "15";;
-     -c|--continue)rm /root/install.sh &> /dev/null
+     -c|--continue)rm /root/NEAR.sh &> /dev/null
                    sed -i -k | --key /root/.bashrc
                    install_paquetes
                    break;;
