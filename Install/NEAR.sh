@@ -9,7 +9,7 @@ chmod +x ${colores} &>/dev/null
 source ${colores}
 CTRL_C() {
   rm -rf ${colores}
-  rm -rf /root/NEAR
+  rm -rf /root/LATAM
   exit
 }
 trap "CTRL_C" INT TERM EXIT
