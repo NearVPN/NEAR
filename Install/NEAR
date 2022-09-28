@@ -506,8 +506,7 @@ chmod +x ${ARQ}/$1
       echo "$Key" >${SCPdir}/key.txt
       [[ -d ${SCPinstal} ]] && rm -rf ${SCPinstal}
       [[ ${byinst} = "true" ]] && install_fim
-      [[ ${#id} -gt 2 ]] && echo "es" > ${SCPidioma} || echo "${id}" > ${SCPidioma}
-       [[ -d ${SCPinstal} ]] && rm -rf ${SCPinstal}   
+      [[ -d ${SCPinstal} ]] && rm -rf ${SCPinstal}   
    [[ ${#id} -gt 2 ]] && echo "es" > ${SCPidioma} || echo "${id}" > ${SCPidioma}
     else
       invalid_key
