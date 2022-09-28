@@ -134,13 +134,6 @@ apt-get install software-properties-common -y > /dev/null 2>&1 && echo -e "\033[
   msgi -bar
   read -t 120 -n 1 -rsp $'\033[1;97m           Preciona Enter Para continuar\n'
   clear && clear
-  function printTitle
-{
-    echo ""
-    echo -e "\033[1;92m$1\033[1;91m"
-    printf '%0.s-' $(seq 1 ${#1})
-    echo ""
-}
 printTitle "Limpieza de caché local"
 apt-get clean
 
@@ -160,6 +153,13 @@ lsb_release -d
 
 #  apt update -y
  # apt upgrade -y
+}
+  function printTitle
+{
+    echo ""
+    echo -e "\033[1;92m$1\033[1;91m"
+    printf '%0.s-' $(seq 1 ${#1})
+    echo ""
 }
 
 post_reboot() {
