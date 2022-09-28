@@ -117,18 +117,18 @@ apt-get install software-properties-common -y > /dev/null 2>&1 && echo -e "\033[
     [[ "$tu_ip" = "n" || "$tu_ip" = "N" ]] && tu_ip
   }
   fun_ip
-  msgi -bar2
-  echo -e "\033[1;93m             AGREGAR Y EDITAR PASS ROOT\033[1;97m"
-  msgi -bar
-  echo -ne "\033[1;97m DIGITE NUEVA CONTRASEÑA:  \033[1;31m" && read pass
-  (
-    echo $pass
-    echo $pass
-  ) | passwd root 2>/dev/null
-  sleep 1s
-  msgi -bar
-  echo -e "\033[1;94m     CONTRASEÑA AGREGADA O EDITADA CORECTAMENTE"
-  echo -e "\033[1;97m TU CONTRASEÑA ROOT AHORA ES: \e[41m $pass \033[0;37m"
+  #msgi -bar2
+  #echo -e "\033[1;93m             AGREGAR Y EDITAR PASS ROOT\033[1;97m"
+  #msgi -bar
+ # echo -ne "\033[1;97m DIGITE NUEVA CONTRASEÑA:  \033[1;31m" && read pass
+ # (
+  #  echo $pass
+  #  echo $pass
+#  ) | passwd root 2>/dev/null
+#  sleep 1s
+  #msgi -bar
+  #echo -e "\033[1;94m     CONTRASEÑA AGREGADA O EDITADA CORECTAMENTE"
+  #echo -e "\033[1;97m TU CONTRASEÑA ROOT AHORA ES: \e[41m $pass \033[0;37m"
   msgi -bar2
   echo -e "\033[1;93m\a\a\a      SE PROCEDERA A INSTALAR LAS ACTULIZACIONES\n PERTINENTES DEL SISTEMA, ESTE PROCESO PUEDE TARDAR\n VARIOS MINUTOS Y PUEDE PEDIR ALGUNAS CONFIRMACIONES \033[0;37m"
   msgi -bar
