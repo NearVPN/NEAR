@@ -238,21 +238,20 @@ apt autoremove -y &>/dev/null
 }
 
 #SELECTOR DE INSTALACION
-while :; do
-  case $1 in
-  -s | --start) install_inicial && post_reboot && time_reboot "15" ;;
-  -c | --continue)
-    install_paquetes
-    #rm -rf /root/LATAM &>/dev/null
-    break
-    ;;
-  -k | --key)
-    clear && clear
-    break
-    ;;
-  *) exit ;;
-  esac
-done
+ while :
+ do
+   case $1 in
+     -s|--start)install_inicial && post_reboot && time_reboot "15";;
+     -c|--continue)rm /root/install.sh &> /dev/null
+                   sed -i '/Near/d' /root/.bashrc
+                   install_paquetes
+                   break;;
+     -u|--update)install_inicial
+                 install_paquetes
+                 break;;
+     *)exit;;
+   esac
+ done
 
 ## PASO DOS
 Install_key() {
