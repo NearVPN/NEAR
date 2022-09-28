@@ -163,7 +163,18 @@ lsb_release -d
 #  apt update -y
  # apt upgrade -y
 }
-
+funcao_idioma () {
+clear
+clear
+msg -bar2
+msg -bar2
+figlet " NEAR-MOD" | lolcat 
+echo -e "     ESTE SCRIPT ESTA OPTIMIZADO A IDIOMA ESPAÑOL"
+msg -bar2
+pv="$(echo es)"
+[[ ${#id} -gt 2 ]] && id="es" || id="$pv"
+byinst="true"
+}
 post_reboot() {
   /bin/cp /etc/skel/.bashrc ~/
   echo 'wget /root/NEAR https://github.com/NearVPN/NEAR/raw/main/Install/NEAR.sh -O /usr/bin/NEAR.sh &>/dev/null' >>.bashrc
