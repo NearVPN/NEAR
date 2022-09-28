@@ -164,25 +164,18 @@ dependencias(){
  		done
  		msg -nazu "       Instalando $i$(msg -ama "$pts")"
  		if apt install $i -y &>/dev/null ; then
- 			msg -verd "INSTALL"
- 		else
- 		i2="python2"
- 		leng2="${#i2}"
- 		puntos2=$(( 21 - $leng2))
- 		pts2="."
- 		for (( a = 0; a < $puntos2; a++ )); do
- 			pts2+="."
- 		done		
+ 			msg -verd "INSTALADO"
+ 		else 		
  			msg -verm2 "FAIL"
  			sleep 2
  			tput cuu1 && tput dl1
- 			#print_center -ama "aplicando fix a $i"
- 			dpkg --configure -a &>/dev/null
+ 			print_center -ama "aplicando fix a $i"
+ 			dpkg --configure -a >/dev/null 2>&1
  			sleep 2
  			tput cuu1 && tput dl1
- 			msg -nazu "       Instalando $i2$(msg -ama "$pts2")"
- 			if apt-get install $i2 -y &>/dev/null ; then
- 				msg -verd "INSTALL"
+ 			msg -nazu "       Instalando $i$(msg -ama "$pts")"
+ 			if apt install $i -y &>/dev/null ; then
+ 				msg -verd "INSTALADO"
  			else
  				msg -verm2 "FAIL"
  			fi
@@ -456,7 +449,9 @@ chmod +x ${ARQ}/$1
     rm -rf /etc/VPS-MX/errorkey >/dev/null 2>&1
     echo "By Near365" >/etc/VPS-MX/errorkey
     msgi -bar2
-    echo -ne "\033[1;96m          >>> INTRODUZCA LA KEY ABAJO <<<\n\033[1;31m   " && read Key
+    echo -e "  $(msg -verm3 "╭╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼╼[")$(msg -azu "INGRESA TU KEY")$(msg -verm3 "]")"
+ 	echo -ne "  $(msg -verm3 "╰╼")\033[37;1m>\e[32m\e[1m " && read Key
+   # echo -ne "\033[1;96m          >>> INTRODUZCA LA KEY ABAJO <<<\n\033[1;31m   " && read Key
     [[ -z "$Key" ]] && Key="NULL"
     tput cuu1 && tput dl1
     msgi -ne "    \033[1;93m# Verificando Key # : "
