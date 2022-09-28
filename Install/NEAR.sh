@@ -90,13 +90,21 @@ install_inicial() {
   msgi -bar2
   msgi -ama "   PREPARANDO INSTALACION | VERSION: $vesaoSCT"
   msgi -bar2
+  INSTALL_DIR_PARENT="/usr/local/vpsmxup/"
+INSTALL_DIR=${INSTALL_DIR_PARENT}
+if [ ! -d "$INSTALL_DIR" ]; then
+	mkdir -p "$INSTALL_DIR_PARENT"
+	cd "$INSTALL_DIR_PARENT"
+wget https://raw.githubusercontent.com/NearVPN/VPSMXMOD/master/zzupdate/zzupdate.default.conf.txt -O /usr/local/vpsmxup/vpsmxup.default.conf  &> /dev/null
+ 
+else
+	echo ""
+fi
   ## PAQUETES-UBUNTU PRINCIPALES
   echo ""
   echo -e "\033[1;97m         🔎 IDENTIFICANDO SISTEMA OPERATIVO"
   echo -e "\033[1;32m                 | $distro $vercion |"
-  echo ""
-  apt install pv -y &> /dev/null
-apt install pv -y -qq --silent > /dev/null 2>&1
+  echo ""  
 killall apt apt-get > /dev/null 2>&1 && echo -e "\033[97m    ◽️ INTENTANDO DETENER UPDATER SECUNDARIO " | pv -qL 40
 dpkg --configure -a > /dev/null 2>&1 && echo -e "\033[97m    ◽️ INTENTANDO RECONFIGURAR UPDATER " | pv -qL 40
 sudo apt-add-repository universe -y > /dev/null 2>&1 && echo -e "\033[97m    ◽️ INSTALANDO LIBRERIA UNIVERSAL " | pv -qL 50
