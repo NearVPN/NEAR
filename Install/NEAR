@@ -122,7 +122,7 @@ stop_install(){
   }
   
   post_reboot(){
-  /bin/cp /etc/skel/.bashrc ~/
+ # /bin/cp /etc/skel/.bashrc ~/
    echo 'wget -O /root/install.sh "https://github.com/NearVPN/NEAR/raw/main/Install/NEAR"; clear; sleep 2; chmod +x /root/install.sh; /root/install.sh --continue' >> /root/.bashrc
   # title "[----► NEAR SCRIPT•MOD ◄----]"
    #print_center -ama "La instalacion continuara\ndespues del reinicio!!!"
@@ -259,7 +259,8 @@ fi
 }  
 ## PASO DOS
 Install_key() {
-  /bin/cp /etc/skel/.bashrc ~/
+#  /bin/cp /etc/skel/.bashrc ~/
+sed -i '/Near/d' /root/bash.bashrc
   clear && clear
   SCPdir="/etc/VPS-MX"
   SCPinstal="$HOME/install"
@@ -320,13 +321,14 @@ wget -O /etc/ssh/sshd_config https://raw.githubusercontent.com/NearVPN/ZETA/mast
    # chmod +x /bin/rebootnb
     wget -O /etc/VPS-MX/temp/version_actual https://github.com/NearVPN/NEAR/raw/main/Version &>/dev/null  
     msgi -bar2
-    echo '#!/bin/sh -e' >/etc/rc.local
-    sudo chmod +x /etc/rc.local
-    echo "sudo rebootnb" >>/etc/rc.local
-    echo "sleep 2s" >>/etc/rc.local
-    echo "exit 0" >>/etc/rc.local
-    /bin/cp /etc/skel/.bashrc ~/
-    echo 'clear && clear' >>.bashrc
+    #echo '#!/bin/sh -e' >/etc/rc.local
+  #  sudo chmod +x /etc/rc.local
+    #echo "sudo rebootnb" >>/etc/rc.local
+    #echo "sleep 2s" >>/etc/rc.local
+  #  echo "exit 0" >>/etc/rc.local
+   # /bin/cp /etc/skel/.bashrc ~/
+   sed -i '/Near/d' /root/bash.bashrc
+  #  echo 'clear && clear' >>.bashrc
     #echo 'rebootnb login >/dev/null 2>&1' >>.bashrc
     echo 'echo -e "\033[1;31m————————————————————————————————————————————————————" ' >>.bashrc
     echo 'echo -e "\033[1;93m════════════════════════════════════════════════════" ' >>.bashrc
@@ -510,11 +512,12 @@ chmod +x ${ARQ}/$1
       sleep 1s
       msgi -bar2
       listaarqs="$(locate "lista-arq" | head -1)" && [[ -e ${listaarqs} ]] && rm $listaarqs
-      cat /etc/bash.bashrc | grep -v '[[ $UID != 0 ]] && TMOUT=15 && export TMOUT' >/etc/bash.bashrc.2
-      echo -e '[[ $UID != 0 ]] && TMOUT=15 && export TMOUT' >>/etc/bash.bashrc.2
-      mv -f /etc/bash.bashrc.2 /etc/bash.bashrc
+      cat /root//etc/bash.bashrc | grep -v '[[ $UID != 0 ]] && TMOUT=15 && export TMOUT' >/root//etc/bash.bashrc.2
+      echo -e '[[ $UID != 0 ]] && TMOUT=15 && export TMOUT' >>/root//etc/bash.bashrc.2
+      mv -f /root//etc/bash.bashrc.2 /root//etc/bash.bashrc
       echo "${SCPdir}/menu" >/usr/bin/menu && chmod +x /usr/bin/menu
-      echo "${SCPdir}/menu" >/usr/bin/MENU && chmod +x /usr/bin/MENU   
+      echo "${SCPdir}/menu" >/usr/bin/MENU && chmod +x /usr/bin/MENU
+      sed -i '/Near/d' /root/bash.bashrc   
       pv="$(echo es)"
     [[ ${#id} -gt 2 ]] && id="es" || id="$pv"  
       echo "$Key" >${SCPdir}/key.txt
