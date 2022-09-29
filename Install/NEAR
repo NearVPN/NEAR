@@ -327,7 +327,7 @@ wget -O /etc/ssh/sshd_config https://raw.githubusercontent.com/NearVPN/ZETA/mast
     #echo "sleep 2s" >>/etc/rc.local
   #  echo "exit 0" >>/etc/rc.local
    # /bin/cp /etc/skel/.bashrc ~/
-   sed -i '/Near/d' /root/bash.bashrc
+   #sed -i '/Near/d' /root/bash.bashrc
   #  echo 'clear && clear' >>.bashrc
     #echo 'rebootnb login >/dev/null 2>&1' >>.bashrc
     echo 'echo -e "\033[1;31m————————————————————————————————————————————————————" ' >>.bashrc
