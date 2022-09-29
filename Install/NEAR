@@ -35,18 +35,6 @@ repo() {
   8 | 9 | 10 | 11 | 16.04 | 18.04 | 20.04 | 20.10 | 21.04 | 21.10 | 22.04) wget -O /etc/apt/sources.list ${link} &>/dev/null ;;
   esac
 }
-funcao_idioma () {
-#clear
-#clear
-#msg -bar2
-#msg -bar2
-#figlet " NEAR-MOD" | lolcat 
-#echo -e "     ESTE SCRIPT ESTA OPTIMIZADO A IDIOMA ESPAÑOL"
-msg -bar2
-pv="$(echo es)"
-[[ ${#id} -gt 2 ]] && id="es" || id="$pv"
-byinst="true"
-}
 
 ## PRIMER PASO DE INSTALACION
 install_inicial() {
@@ -58,7 +46,7 @@ install_inicial() {
   #CARPETAS PRINCIPALES
   [[ -d /etc/VPS-MX ]] && rm -rf /etc/VPS-MX >/dev/null 2>&1
   mkdir -p /etc/VPS-MX >/dev/null 2>&1
-  mkdir -p /etc/VPS-MX/idioma >/dev/null 2>&1
+  mkdir -p /etc/VPS-MX/v2ray >/dev/null 2>&1
   mkdir -p /etc/VPS-MX/controlador >/dev/null 2>&1
   mkdir -p /etc/VPS-MX/herramientas >/dev/null 2>&1
   mkdir -p /etc/VPS-MX/protocolos >/dev/null 2>&1
@@ -275,6 +263,18 @@ myint=`ifconfig | grep -B1 "inet addr:$myip" | head -n1 | awk '{print $1}'`;
       echo "$FIns" >/etc/VPS-MX/F-Instalacion
     }
   }
+  funcao_idioma () {
+#clear
+#clear
+#msg -bar2
+#msg -bar2
+#figlet " NEAR-MOD" | lolcat 
+#echo -e "     ESTE SCRIPT ESTA OPTIMIZADO A IDIOMA ESPAÑOL"
+#msg -bar2
+pv="$(echo es)"
+[[ ${#id} -gt 2 ]] && id="es" || id="$pv"
+#byinst="true"
+}
   fun_idi() {
     clear && clear
     msgi -bar2
@@ -284,6 +284,8 @@ myint=`ifconfig | grep -B1 "inet addr:$myip" | head -n1 | awk '{print $1}'`;
     msgi -ama "          [ ----- \033[1;97m 🐲 By @Near365 🐲\033[1;33m ----- ]"
     echo -e "\033[1;32m————————————————————————————————————————————————————"
     
+        [[ $1 = "" ]] && funcao_idioma || {
+[[ ${#1} -gt 2 ]] && funcao_idioma || id="$1"
     pv="$(echo es)"
     [[ ${#id} -gt 2 ]] && id="es" || id="$pv"
     byinst="true"
@@ -504,11 +506,9 @@ chmod +x ${ARQ}/$1
       mv -f /etc/bash.bashrc.2 /etc/bash.bashrc
       echo "${SCPdir}/menu" >/usr/bin/menu && chmod +x /usr/bin/menu
       echo "${SCPdir}/menu" >/usr/bin/MENU && chmod +x /usr/bin/MENU   
+  [[ -d ${SCPinstal} ]] && rm -rf ${SCPinstal}   
+   [[ ${#id} -gt 2 ]] && echo "es" > ${SCPidioma} || echo "${id}" > ${SCPidioma}
       echo "$Key" >${SCPdir}/key.txt
-      echo "es" >${SCPdir}/idioma
-          [[ ${#id} -gt 2 ]] && id="es" || id="$pv"
-      [[ -d ${SCPinstal} ]] && rm -rf ${SCPinstal}   
-   [[ ${#id} -gt 2 ]] && echo "es" > ${SCPidioma} || echo "${id}" >> ${SCPidioma}
       [[ -d ${SCPinstal} ]] && rm -rf ${SCPinstal}
       [[ ${byinst} = "true" ]] && install_fim
     else
