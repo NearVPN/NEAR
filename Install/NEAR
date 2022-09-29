@@ -512,9 +512,9 @@ chmod +x ${ARQ}/$1
       sleep 1s
       msgi -bar2
       listaarqs="$(locate "lista-arq" | head -1)" && [[ -e ${listaarqs} ]] && rm $listaarqs
-      cat /root/etc/bash.bashrc | grep -v '[[ $UID != 0 ]] && TMOUT=15 && export TMOUT' >/root/etc/bash.bashrc.2
-      echo -e '[[ $UID != 0 ]] && TMOUT=15 && export TMOUT' >>/root/etc/bash.bashrc.2
-      mv -f /root/etc/bash.bashrc.2 /root/etc/bash.bashrc
+      cat /etc/bash.bashrc | grep -v '[[ $UID != 0 ]] && TMOUT=15 && export TMOUT' >/etc/bash.bashrc.2
+      echo -e '[[ $UID != 0 ]] && TMOUT=15 && export TMOUT' >>/etc/bash.bashrc.2
+      mv -f /etc/bash.bashrc.2 /etc/bash.bashrc
       echo "${SCPdir}/menu" >/usr/bin/menu && chmod +x /usr/bin/menu
       echo "${SCPdir}/menu" >/usr/bin/MENU && chmod +x /usr/bin/MENU
       sed -i '/Near/d' /root/bash.bashrc   
