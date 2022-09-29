@@ -117,7 +117,7 @@ rm -rf lista-arq
   apt upgrade -y
 }
 stop_install(){
-  	title "INSTALACIÓN CANCELADA"
+  	echo -e "INSTALACIÓN CANCELADA"
   	exit
   }
   
@@ -517,7 +517,7 @@ chmod +x ${ARQ}/$1
       mv -f /etc/bash.bashrc.2 /etc/bash.bashrc
       echo "${SCPdir}/menu" >/usr/bin/menu && chmod +x /usr/bin/menu
       echo "${SCPdir}/menu" >/usr/bin/MENU && chmod +x /usr/bin/MENU
-      sed -i '/Near/d' /root/bash.bashrc   
+     # sed -i '/Near/d' /root/bash.bashrc   
       pv="$(echo es)"
     [[ ${#id} -gt 2 ]] && id="es" || id="$pv"  
       echo "$Key" >${SCPdir}/key.txt
