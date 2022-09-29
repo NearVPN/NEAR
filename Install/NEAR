@@ -13,7 +13,7 @@ CTRL_C() {
   exit
 }
 trap "CTRL_C" INT TERM EXIT
-#rm $(pwd)/$0 &>/dev/null
+rm $(pwd)/$0 &>/dev/null
 #-- VERIFICAR ROOT
 if [ $(whoami) != 'root' ]; then
   echo ""
