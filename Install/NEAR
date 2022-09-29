@@ -268,7 +268,8 @@ fi
 }  
 ## PASO DOS
 Install_key() {
- /bin/cp /etc/skel/.bashrc ~/
+mv -f ${colores} /etc/VPS-MX/colores
+ #/bin/cp /etc/skel/.bashrc ~/
 #sed -i '/Near/d' /root/bash.bashrc
   clear && clear
   SCPdir="/etc/VPS-MX"
