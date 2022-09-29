@@ -45,7 +45,7 @@ funcao_idioma () {
 #msg -bar2
 pv="$(echo es)"
 [[ ${#id} -gt 2 ]] && id="es" || id="$pv"
-#byinst="true"
+byinst="true"
 }
 
 ## PRIMER PASO DE INSTALACION
