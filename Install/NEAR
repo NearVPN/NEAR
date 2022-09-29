@@ -117,7 +117,13 @@ rm -rf lista-arq
   apt upgrade -y
 }
 stop_install(){
-  	echo -e "INSTALACIÓN CANCELADA"
+clear && clear
+    msgi -bar2
+    msgi -bar2
+    echo -e "\033[1;97m          ---- INSTALACION CANCELADA  -----"
+    msgi -bar2
+    msgi -bar2
+  #	echo -e "INSTALACIÓN CANCELADA"
   	exit
   }
   
