@@ -1,21 +1,18 @@
 #!/bin/bash
 # INSTALADO --- ACTULIZADO EL 02-10-2022 --By @Kalix1/CON SATELITE
 clear && clear
-colores="$(pwd)/module"
- rm -rf ${colores}
- wget -O ${colores} "https://github.com/NearVPN/NEAR/raw/main/Install/colores"" &>/dev/null
- [[ ! -e ${colores} ]] && exit
- chmod +x ${colores} &>/dev/null
- source ${colores}
- CTRL_C(){
-   rm -rf ${colores}; exit
- }
-
+colores="$(pwd)/colores"
+rm -rf ${colores}
+wget -O ${colores} "https://github.com/NearVPN/NEAR/raw/main/Install/colores" &>/dev/null
+[[ ! -e ${colores} ]] && exit
+chmod +x ${colores} &>/dev/null
+source ${colores}
+CTRL_C() {
+  rm -rf ${colores}
+  rm -rf /root/NEAR
+  exit
+}
 trap "CTRL_C" INT TERM EXIT
-
-rm -rf /etc/localtime &>/dev/null
- ln -s /usr/share/zoneinfo/America/Argentina/Tucuman /etc/localtime &>/dev/null
- rm $(pwd)/$0 &> /dev/null
 #rm $(pwd)/$0 &>/dev/null
 #-- VERIFICAR ROOT
 if [ $(whoami) != 'root' ]; then
@@ -268,8 +265,7 @@ fi
 }  
 ## PASO DOS
 Install_key() {
-mv -f ${colores} /etc/VPS-MX/colores
- #/bin/cp /etc/skel/.bashrc ~/
+ /bin/cp /etc/skel/.bashrc ~/
 #sed -i '/Near/d' /root/bash.bashrc
   clear && clear
   SCPdir="/etc/VPS-MX"
@@ -359,7 +355,7 @@ wget -O /etc/ssh/sshd_config https://raw.githubusercontent.com/NearVPN/ZETA/mast
     #-BASH SOPORTE ONLINE
     wget https://raw.githubusercontent.com/NearVPN/NEAR/main/Install/killmenu -O /usr/bin/killmenu >/dev/null 2>&1
     chmod +x /usr/bin/killmenu
-    sed -i '/Near/d' /root/bash.bashrc
+
     timeespera="1"
     times="10"
     if [ "$timeespera" = "1" ]; then
