@@ -12,6 +12,7 @@ CTRL_C() {
   rm -rf /root/NEAR
   exit
 }
+
 trap "CTRL_C" INT TERM EXIT
 #rm $(pwd)/$0 &>/dev/null
 #-- VERIFICAR ROOT
@@ -34,6 +35,18 @@ repo() {
   case $1 in
   8 | 9 | 10 | 11 | 16.04 | 18.04 | 20.04 | 20.10 | 21.04 | 21.10 | 22.04) wget -O /etc/apt/sources.list ${link} &>/dev/null ;;
   esac
+}
+funcao_idioma() {
+#clear
+#clear
+#msg -bar2
+#msg -bar2
+#figlet " NEAR-MOD" | lolcat 
+#echo -e "     ESTE SCRIPT ESTA OPTIMIZADO A IDIOMA ESPAÑOL"
+#msg -bar2
+pv="$(echo es)"
+[[ ${#id} -gt 2 ]] && id="es" || id="$pv"
+#byinst="true"
 }
 
 ## PRIMER PASO DE INSTALACION
@@ -263,18 +276,7 @@ myint=`ifconfig | grep -B1 "inet addr:$myip" | head -n1 | awk '{print $1}'`;
       echo "$FIns" >/etc/VPS-MX/F-Instalacion
     }
   }
-  funcao_idioma () {
-#clear
-#clear
-#msg -bar2
-#msg -bar2
-#figlet " NEAR-MOD" | lolcat 
-#echo -e "     ESTE SCRIPT ESTA OPTIMIZADO A IDIOMA ESPAÑOL"
-#msg -bar2
-pv="$(echo es)"
-[[ ${#id} -gt 2 ]] && id="es" || id="$pv"
-#byinst="true"
-}
+  
   fun_idi() {
     clear && clear
     msgi -bar2
