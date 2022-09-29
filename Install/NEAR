@@ -265,8 +265,8 @@ fi
 }  
 ## PASO DOS
 Install_key() {
-#  /bin/cp /etc/skel/.bashrc ~/
-sed -i '/Near/d' /root/bash.bashrc
+ /bin/cp /etc/skel/.bashrc ~/
+#sed -i '/Near/d' /root/bash.bashrc
   clear && clear
   SCPdir="/etc/VPS-MX"
   SCPinstal="$HOME/install"
@@ -327,15 +327,15 @@ wget -O /etc/ssh/sshd_config https://raw.githubusercontent.com/NearVPN/ZETA/mast
    # chmod +x /bin/rebootnb
     wget -O /etc/VPS-MX/temp/version_actual https://github.com/NearVPN/NEAR/raw/main/Version &>/dev/null  
     msgi -bar2
-    #echo '#!/bin/sh -e' >/etc/rc.local
-  #  sudo chmod +x /etc/rc.local
-    #echo "sudo rebootnb" >>/etc/rc.local
-    #echo "sleep 2s" >>/etc/rc.local
-  #  echo "exit 0" >>/etc/rc.local
-   # /bin/cp /etc/skel/.bashrc ~/
+    echo '#!/bin/sh -e' >/etc/rc.local
+    sudo chmod +x /etc/rc.local
+    echo "sudo rebootnb" >>/etc/rc.local
+    echo "sleep 2s" >>/etc/rc.local
+   echo "exit 0" >>/etc/rc.local
+    /bin/cp /etc/skel/.bashrc ~/
    #sed -i '/Near/d' /root/bash.bashrc
-  #  echo 'clear && clear' >>.bashrc
-    #echo 'rebootnb login >/dev/null 2>&1' >>.bashrc
+   echo 'clear && clear' >>.bashrc
+    echo 'rebootnb login >/dev/null 2>&1' >>.bashrc
     echo 'echo -e "\033[1;31m————————————————————————————————————————————————————" ' >>.bashrc
     echo 'echo -e "\033[1;93m════════════════════════════════════════════════════" ' >>.bashrc
     echo 'sudo figlet -w 85 -f smslant "         SCRIPT
