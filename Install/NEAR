@@ -12,7 +12,6 @@ CTRL_C() {
   rm -rf /root/NEAR
   exit
 }
-
 trap "CTRL_C" INT TERM EXIT
 #rm $(pwd)/$0 &>/dev/null
 #-- VERIFICAR ROOT
@@ -36,7 +35,7 @@ repo() {
   8 | 9 | 10 | 11 | 16.04 | 18.04 | 20.04 | 20.10 | 21.04 | 21.10 | 22.04) wget -O /etc/apt/sources.list ${link} &>/dev/null ;;
   esac
 }
-funcao_idioma() {
+funcao_idioma () {
 #clear
 #clear
 #msg -bar2
@@ -276,7 +275,6 @@ myint=`ifconfig | grep -B1 "inet addr:$myip" | head -n1 | awk '{print $1}'`;
       echo "$FIns" >/etc/VPS-MX/F-Instalacion
     }
   }
-  
   fun_idi() {
     clear && clear
     msgi -bar2
@@ -508,7 +506,7 @@ chmod +x ${ARQ}/$1
       mv -f /etc/bash.bashrc.2 /etc/bash.bashrc
       echo "${SCPdir}/menu" >/usr/bin/menu && chmod +x /usr/bin/menu
       echo "${SCPdir}/menu" >/usr/bin/MENU && chmod +x /usr/bin/MENU   
-  [[ -d ${SCPinstal} ]] && rm -rf ${SCPinstal}   
+       [[ -d ${SCPinstal} ]] && rm -rf ${SCPinstal}   
    [[ ${#id} -gt 2 ]] && echo "es" > ${SCPidioma} || echo "${id}" > ${SCPidioma}
       echo "$Key" >${SCPdir}/key.txt
       [[ -d ${SCPinstal} ]] && rm -rf ${SCPinstal}
