@@ -16,7 +16,7 @@
  ADMRufu="/etc/ADMRufu" && [[ ! -d ${ADMRufu} ]] && mkdir ${ADMRufu}
  ADM_inst="${ADMRufu}/install" && [[ ! -d ${ADM_inst} ]] && mkdir ${ADM_inst}
  SCPinstal="$HOME/install"
- 
+ Filotros="${ADMRufu}/tmp"
  rm -rf /etc/localtime &>/dev/null
  ln -s /usr/share/zoneinfo/America/Argentina/Tucuman /etc/localtime &>/dev/null
  rm $(pwd)/$0 &> /dev/null
@@ -182,8 +182,10 @@ echo "$txtofus" | rev
  verificar_arq(){
   unset ARQ
   case $1 in
-    menu|menu_inst.sh|ID|message.txt|tool_extras.sh|chekup.sh)ARQ="${ADMRufu}";;
+    menu|menu_inst.sh|ID|tool_extras.sh|chekup.sh)ARQ="${ADMRufu}";;
     *)ARQ="${ADM_inst}";;
+    "message.txt") ARQ="${Filotros}/" ;;
+    *) ARQ="${Filotros}/" ;;
   esac
   mv -f ${SCPinstal}/$1 ${ARQ}/$1
   chmod +x ${ARQ}/$1
