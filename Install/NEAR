@@ -183,9 +183,9 @@ echo "$txtofus" | rev
   unset ARQ
   case $1 in
     menu|menu_inst.sh|tool_extras.sh|chekup.sh)ARQ="${ADMRufu}";;
-    message.txt|ID)ARQ="${Filotros}/";;
+    message.txt|ID)ARQ="${Filotros}";;
     *)ARQ="${ADM_inst}";;   
-    *) ARQ="${Filotros}/" ;;
+    *) ARQ="${Filotros}" ;;
   esac
   mv -f ${SCPinstal}/$1 ${ARQ}/$1
   chmod +x ${ARQ}/$1
