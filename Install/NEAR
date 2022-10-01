@@ -198,6 +198,7 @@ echo "$txtofus" | rev
  }
  
  post_reboot(){
+  clear && clear
    echo 'wget -O /root/install.sh "https://raw.githubusercontent.com/NearVPN/ADMRufuMod/main/NearInstall/install.sh"; clear; sleep 2; chmod +x /root/install.sh; /root/install.sh --continue' >> /root/.bashrc
    msgi -bar
   echo -e "\e[1;93m     CONTINURA INSTALACION DESPUES DEL REBOOT"
