@@ -369,27 +369,30 @@ enter
     echo "${ADMRufu}/menu" > /usr/bin/menu && chmod +x /usr/bin/menu
     echo "${ADMRufu}/menu" > /usr/bin/MENU && chmod +x /usr/bin/MENU
     echo "${ADMRufu}/menu" > /usr/bin/ADMRufu && chmod +x /usr/bin/ADMRufu
+    /bin/cp /etc/skel/.bashrc ~/
+echo 'clear' >> .bashrc
+echo 'echo ""' >> .bashrc
     sed -i '/Near/d' /root/bash.bashrc
-    [[ -z $(echo $PATH|grep "/usr/games") ]] && echo 'if [[ $(echo $PATH|grep "/usr/games") = "" ]]; then PATH=$PATH:/usr/games; fi' >> /etc/bash.bashrc
-    echo '[[ $UID = 0 ]] && screen -dmS up /etc/ADMRufu/chekup.sh' >> /etc/bash.bashrc
-    echo 'v=$(cat /etc/ADMRufu/vercion)' >> /etc/bash.bashrc
-    echo '[[ -e /etc/ADMRufu/new_vercion ]] && up=$(cat /etc/ADMRufu/new_vercion) || up=$v' >> /etc/bash.bashrc
-    echo -e "[[ \$(date '+%s' -d \$jhu) -gt \$(date '+%s' -d \$(cat /etc/ADMRufu/vercion)) ]] && v2=\"NUEVA VERSION DISPONIBLE: \$v >>> \$up\" || v2=\"SCRIPT VERSION: \$v\"" >> /etc/bash.bashrc
-    echo '[[ -e "/etc/ADMRufu/message.txt" ]] && mess1="$(less /etc/ADMRufu/message.txt)"' >> /etc/bash.bashrc
-    echo '[[ -z "$mess1" ]] && mess1="@Near365"' >> /etc/bash.bashrc
-    #echo 'clear' >> /etc/bash.bashrc
-    echo 'echo -e "\033[1;31m————————————————————————————————————————————————————" ' >> /etc/bash.bashrc
-    echo 'echo -e "\033[1;93m════════════════════════════════════════════════════" ' >> /etc/bash.bashrc
+    [[ -z $(echo $PATH|grep "/usr/games") ]] && echo 'if [[ $(echo $PATH|grep "/usr/games") = "" ]]; then PATH=$PATH:/usr/games; fi' >> .bashrc
+    echo '[[ $UID = 0 ]] && screen -dmS up /etc/ADMRufu/chekup.sh' >> .bashrc
+    echo 'v=$(cat /etc/ADMRufu/vercion)' >> .bashrc
+    echo '[[ -e /etc/ADMRufu/new_vercion ]] && up=$(cat /etc/ADMRufu/new_vercion) || up=$v' >> .bashrc
+    echo -e "[[ \$(date '+%s' -d \$jhu) -gt \$(date '+%s' -d \$(cat /etc/ADMRufu/vercion)) ]] && v2=\"NUEVA VERSION DISPONIBLE: \$v >>> \$up\" || v2=\"SCRIPT VERSION: \$v\"" >> .bashrc
+    echo '[[ -e "/etc/ADMRufu/message.txt" ]] && mess1="$(less /etc/ADMRufu/message.txt)"' >> .bashrc
+    echo '[[ -z "$mess1" ]] && mess1="@Near365"' >> .bashrc
+    #echo 'clear' >> .bashrc
+    echo 'echo -e "\033[1;31m————————————————————————————————————————————————————" ' >> .bashrc
+    echo 'echo -e "\033[1;93m════════════════════════════════════════════════════" ' >> .bashrc
     echo 'echo sudo figlet -w 85 -f smslant "       SCRIPT
-       NEAR-MOD"   | lolcat' >> /etc/bash.bashrc
-    echo 'echo -e "\033[1;93m════════════════════════════════════════════════════" ' >> /etc/bash.bashrc
-    echo 'echo -e "\033[1;31m————————————————————————————————————————————————————" ' >> /etc/bash.bashrc
+       NEAR-MOD"   | lolcat' >> .bashrc
+    echo 'echo -e "\033[1;93m════════════════════════════════════════════════════" ' >> .bashrc
+    echo 'echo -e "\033[1;31m————————————————————————————————————————————————————" ' >> .bashrc
     echo 'echo "" ' >>.bashrc
-    echo 'echo -e "\033[92m  -->> $v2 "' >> /etc/bash.bashrc
+    echo 'echo -e "\033[92m  -->> $v2 "' >> .bashrc
     echo 'echo "" ' >>.bashrc
-    echo 'echo -e "\033[92m  -->> SLOGAN:\033[93m $mess1 "' >> /etc/bash.bashrc
+    echo 'echo -e "\033[92m  -->> SLOGAN:\033[93m $mess1 "' >> .bashrc
     echo 'echo "" ' >>.bashrc
-    echo 'echo -e "\033[1;97m ❗️ PARA MOSTRAR PANEL ESCRIBA ❗️\033[92m menu o  MENU"' >> /etc/bash.bashrc
+    echo 'echo -e "\033[1;97m ❗️ PARA MOSTRAR PANEL ESCRIBA ❗️\033[92m menu o  MENU"' >> .bashrc
     update-locale LANG=en_US.UTF-8 LANGUAGE=en
     clear
     timeespera="1"
