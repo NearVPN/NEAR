@@ -182,8 +182,8 @@ echo "$txtofus" | rev
  verificar_arq(){
   unset ARQ
   case $1 in
-    menu|menu_inst.sh|tool_extras.sh|chekup.sh)ARQ="${ADMRufu}";;
-    "message.txt")ARQ="${Filotros}";;
+    menu|menu_inst.sh|message.txt|tool_extras.sh|chekup.sh)ARQ="${ADMRufu}";;
+    #"message.txt")ARQ="${Filotros}";;
     #*)ARQ="${Filotros}" ;;
     *)ARQ="${ADM_inst}";;        
   esac
@@ -375,7 +375,7 @@ enter
     echo 'v=$(cat /etc/ADMRufu/vercion)' >> /etc/bash.bashrc
     echo '[[ -e /etc/ADMRufu/new_vercion ]] && up=$(cat /etc/ADMRufu/new_vercion) || up=$v' >> /etc/bash.bashrc
     echo -e "[[ \$(date '+%s' -d \$up) -gt \$(date '+%s' -d \$(cat /etc/ADMRufu/vercion)) ]] && v2=\"NUEVA VERSION DISPONIBLE: \$v >>> \$up\" || v2=\"SCRIPT VERSION: \$v\"" >> /etc/bash.bashrc
-    echo '[[ -e "/etc/ADMRufu/tmp/message.txt" ]] && mess1="$(less /etc/ADMRufu/tmp/message.txt)"' >> /etc/bash.bashrc
+    echo '[[ -e "/etc/ADMRufu/message.txt" ]] && mess1="$(less /etc/ADMRufu/message.txt)"' >> /etc/bash.bashrc
     echo '[[ -z "$mess1" ]] && mess1="@Near365"' >> /etc/bash.bashrc
     echo 'clear' >> /etc/bash.bashrc
     echo 'echo -e "\033[1;31m————————————————————————————————————————————————————" ' >> /etc/bash.bashrc
