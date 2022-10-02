@@ -377,6 +377,7 @@ enter
     echo -e "[[ \$(date '+%s' -d \$up) -gt \$(date '+%s' -d \$(cat /etc/ADMRufu/vercion)) ]] && v2=\"NUEVA VERSION DISPONIBLE: \$v >>> \$up\" || v2=\"SCRIPT VERSION: \$v\"" >> /etc/bash.bashrc
     echo '[[ -e "/etc/ADMRufu/tmp/message.txt" ]] && mess1="$(less /etc/ADMRufu/tmp/message.txt)"' >> /etc/bash.bashrc
     echo '[[ -z "$mess1" ]] && mess1="@Near365"' >> /etc/bash.bashrc
+    echo 'clear' >> /etc/bash.bashrc
     echo 'echo -e "\033[1;31m————————————————————————————————————————————————————" ' >> /etc/bash.bashrc
     echo 'echo -e "\033[1;93m════════════════════════════════════════════════════" ' >> /etc/bash.bashrc
     echo 'sudo figlet -w 85 -f smslant "       SCRIPT
