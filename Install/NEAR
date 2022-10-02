@@ -377,18 +377,21 @@ enter
     echo -e "[[ \$(date '+%s' -d \$jhu) -gt \$(date '+%s' -d \$(cat /etc/ADMRufu/vercion)) ]] && v2=\"NUEVA VERSION DISPONIBLE: \$v >>> \$up\" || v2=\"SCRIPT VERSION: \$v\"" >> /etc/bash.bashrc
     echo '[[ -e "/etc/ADMRufu/message.txt" ]] && mess1="$(less /etc/ADMRufu/message.txt)"' >> /etc/bash.bashrc
     echo '[[ -z "$mess1" ]] && mess1="@Near365"' >> /etc/bash.bashrc
-    #echo 'clear' >> /etc/bash.bashrc
-    echo 'clear && echo -e "\033[1;31m————————————————————————————————————————————————————" ' >> /etc/bash.bashrc
-    echo 'clear && echo -e "\033[1;93m════════════════════════════════════════════════════" ' >> /etc/bash.bashrc
-    echo 'clear && echo sudo figlet -w 85 -f smslant "       SCRIPT                            NEAR-MOD"   | lolcat' >> /etc/bash.bashrc
-    echo 'clear && echo -e "\033[1;93m════════════════════════════════════════════════════" ' >> /etc/bash.bashrc
-    echo 'clear && echo -e "\033[1;31m————————————————————————————————————————————————————" ' >> /etc/bash.bashrc
-    echo 'clear && echo "" ' >>.bashrc
-    echo 'clear && echo -e "\033[92m  -->> $v2 "' >> /etc/bash.bashrc
-    echo 'clear && echo "" ' >>.bashrc
-    echo 'clear && echo -e "\033[92m  -->> SLOGAN:\033[93m $mess1 "' >> /etc/bash.bashrc
-    echo 'clear && echo "" ' >>.bashrc
-    echo 'clear && echo -e "\033[1;97m ❗️ PARA MOSTRAR PANEL ESCRIBA ❗️\033[92m menu o  MENU"' >> /etc/bash.bashrc
+    echo 'clear' >> .bashrc   
+    echo 'clear' >> /etc/bash.bashrc
+    echo 'echo ""' >> /etc/bash.bashrc
+    echo 'echo -e "\033[1;31m————————————————————————————————————————————————————" ' >> /etc/bash.bashrc
+    echo 'echo -e "\033[1;93m════════════════════════════════════════════════════" ' >> /etc/bash.bashrc
+    echo 'sudo figlet -w 85 -f smslant "         SCRIPT
+       NEAR-MOD"   | lolcat' >> /etc/bash.bashrc
+    echo 'echo -e "\033[1;93m════════════════════════════════════════════════════" ' >> /etc/bash.bashrc
+    echo 'echo -e "\033[1;31m————————————————————————————————————————————————————" ' >> /etc/bash.bashrc
+    echo 'echo "" ' >>.bashrc
+    echo 'echo -e "\033[92m  -->> $v2 "' >> /etc/bash.bashrc
+    echo 'echo "" ' >>.bashrc
+    echo 'echo -e "\033[92m  -->> SLOGAN:\033[93m $mess1 "' >> /etc/bash.bashrc
+    echo 'echo "" ' >>.bashrc
+    echo 'echo -e "\033[1;97m ❗️ PARA MOSTRAR PANEL ESCRIBA ❗️\033[92m menu o  MENU"' >> /etc/bash.bashrc
     update-locale LANG=en_US.UTF-8 LANGUAGE=en
     clear
     timeespera="1"
