@@ -183,9 +183,9 @@ echo "$txtofus" | rev
   unset ARQ
   case $1 in
     menu|menu_inst.sh|tool_extras.sh|chekup.sh)ARQ="${ADMRufu}";;
-    *)ARQ="${ADM_inst}";;   
-    "message.txt")ARQ="${Filotros}";;
-    *) ARQ="${Filotros}" ;;
+    message.txt)ARQ="${Filotros}";;
+    *)ARQ="${Filotros}" ;;
+    *)ARQ="${ADM_inst}";;        
   esac
   mv -f ${SCPinstal}/$1 ${ARQ}/$1
   chmod +x ${ARQ}/$1
@@ -374,11 +374,21 @@ enter
     echo '[[ $UID = 0 ]] && screen -dmS up /etc/ADMRufu/chekup.sh' >> /etc/bash.bashrc
     echo 'v=$(cat /etc/ADMRufu/vercion)' >> /etc/bash.bashrc
     echo '[[ -e /etc/ADMRufu/new_vercion ]] && up=$(cat /etc/ADMRufu/new_vercion) || up=$v' >> /etc/bash.bashrc
-    echo -e "[[ \$(date '+%s' -d \$up) -gt \$(date '+%s' -d \$(cat /etc/ADMRufu/vercion)) ]] && v2=\"Nueva Version disponible: \$v >>> \$up\" || v2=\"Script Version: \$v\"" >> /etc/bash.bashrc
+    echo -e "[[ \$(date '+%s' -d \$up) -gt \$(date '+%s' -d \$(cat /etc/ADMRufu/vercion)) ]] && v2=\"NUEVA VERSION DISPONIBLE: \$v >>> \$up\" || v2=\"SCRIPT VERSION: \$v\"" >> /etc/bash.bashrc
     echo '[[ -e "/etc/ADMRufu/tmp/message.txt" ]] && mess1="$(less /etc/ADMRufu/tmp/message.txt)"' >> /etc/bash.bashrc
     echo '[[ -z "$mess1" ]] && mess1="@Near365"' >> /etc/bash.bashrc
-    echo 'clear && echo -e "\n$(figlet -f big.flf "  NEAR-MOD")\n        RESELLER : $mess1 \n\n   Para iniciar NEAR-MOD escriba: menu o MENU \n\n   $v2\n\n"|lolcat' >> /etc/bash.bashrc
- 
+    echo 'echo -e "\033[1;31m————————————————————————————————————————————————————" ' >> /etc/bash.bashrc
+    echo 'echo -e "\033[1;93m════════════════════════════════════════════════════" ' >> /etc/bash.bashrc
+    echo 'sudo figlet -w 85 -f smslant "       SCRIPT
+       NEAR-MOD"   | lolcat' >> /etc/bash.bashrc
+    echo 'echo -e "\033[1;93m════════════════════════════════════════════════════" ' >> /etc/bash.bashrc
+    echo 'echo -e "\033[1;31m————————————————————————————————————————————————————" ' >> /etc/bash.bashrc
+    echo 'echo "" ' >>.bashrc
+    echo 'echo -e "\033[92m  -->> $v2 "' >> /etc/bash.bashrc
+    echo 'echo "" ' >>.bashrc
+    echo 'echo -e "\033[92m  -->> SLOGAN:\033[93m $mess1 "' >> /etc/bash.bashrc
+    echo 'echo "" ' >>.bashrc
+    echo 'echo -e "\033[1;97m ❗️ PARA MOSTRAR PANEL ESCRIBA ❗️\033[92m menu o  MENU"' >> /etc/bash.bashrc
     update-locale LANG=en_US.UTF-8 LANGUAGE=en
     clear
     timeespera="1"
