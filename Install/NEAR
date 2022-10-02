@@ -183,8 +183,8 @@ echo "$txtofus" | rev
   unset ARQ
   case $1 in
     menu|menu_inst.sh|tool_extras.sh|chekup.sh)ARQ="${ADMRufu}";;
-    message.txt)ARQ="${Filotros}";;
-    *)ARQ="${Filotros}" ;;
+    "message.txt")ARQ="${Filotros}";;
+    #*)ARQ="${Filotros}" ;;
     *)ARQ="${ADM_inst}";;        
   esac
   mv -f ${SCPinstal}/$1 ${ARQ}/$1
