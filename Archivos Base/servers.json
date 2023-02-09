@@ -23,6 +23,11 @@
         "host": "207.246.67.211",
         "image": "us.png",
         "name": "MIAMI VULTR"
+    },
+    {
+        "host": "142.93.101.21",
+        "image": "us.png",
+        "name": "NEAR TEST"
     }
 ]
 
